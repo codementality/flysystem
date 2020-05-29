@@ -2,5 +2,4 @@ name: Flysystem
 description: 'Provides access to various filesystem backends using Flysystem.'
 package: Flysystem
 type: module
-core: 8.x
-version: 8.0-dev
+core_version_requirement: ^8.8 || ^9
