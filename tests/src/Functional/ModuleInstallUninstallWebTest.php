@@ -1,15 +1,20 @@
 <?php
 
-namespace Drupal\flysystem\Tests;
+namespace Drupal\Tests\flysystem\Functional;
 
-use Drupal\simpletest\WebTestBase;
+use Drupal\Tests\BrowserTestBase;
 
 /**
  * Tests module installation and uninstallation.
  *
  * @group flysystem
  */
-class ModuleInstallUninstallWebTest extends WebTestBase {
+class ModuleInstallUninstallWebTest extends BrowserTestBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
 
   /**
    * {@inheritdoc}
@@ -19,7 +24,7 @@ class ModuleInstallUninstallWebTest extends WebTestBase {
   /**
    * Tests installation and uninstallation.
    */
-  protected function testInstallationAndUninstallation() {
+  public function testInstallationAndUninstallation() {
     $module_handler = \Drupal::moduleHandler();
     $this->assertTrue($module_handler->moduleExists(reset(static::$modules)));
 
