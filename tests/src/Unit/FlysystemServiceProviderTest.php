@@ -24,6 +24,8 @@ use Drupal\flysystem\PathProcessor\LocalPathProcessor;
 class FlysystemServiceProviderTest extends UnitTestCase {
 
   /**
+   * The container.
+   *
    * @var \Symfony\Component\DependencyInjection\ContainerInterface
    */
   protected $container;
@@ -73,7 +75,11 @@ class FlysystemServiceProviderTest extends UnitTestCase {
   public function testLocalRouteProviderGetsAdded() {
     new Settings([
       'flysystem' => [
-        'testscheme' => ['driver' => 'local', 'config' => ['public' => TRUE]]],
+        'testscheme' => [
+          'driver' => 'local',
+          'config' => ['public' => TRUE],
+        ],
+      ],
     ]);
 
     (new FlysystemServiceProvider())->register($this->container);

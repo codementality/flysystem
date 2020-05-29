@@ -16,10 +16,13 @@ class SchemeExtensionTraitTest extends UnitTestCase {
    * @covers ::getSchemeForExtension
    */
   public function test() {
-    new Settings(['flysystem' => [
-      'local' => ['serve_js' => TRUE, 'driver' => 'asdf'],
-      'ftp' => ['serve_css' => TRUE],
-    ]]);
+
+    new Settings([
+      'flysystem' => [
+        'local' => ['serve_js' => TRUE, 'driver' => 'asdf'],
+        'ftp' => ['serve_css' => TRUE],
+      ],
+    ]);
 
     $trait = $this->getMockForTrait(SchemeExtensionTrait::class);
     $this->assertSame('local', $trait->getSchemeForExtension('js'));

@@ -63,24 +63,28 @@ class Ftp implements FlysystemPluginInterface {
    */
   public function ensure($force = FALSE) {
     if ($this->getAdapter() instanceof FtpAdapter) {
-      return [[
-        'severity' => RfcLogLevel::INFO,
-        'message' => 'Successfully connected to %host:%port.',
-        'context' => [
-          '%host' => $this->configuration['host'],
-          '%port' => isset($this->configuration['port']) ? $this->configuration['port'] : 21,
+      return [
+        [
+          'severity' => RfcLogLevel::INFO,
+          'message' => 'Successfully connected to %host:%port.',
+          'context' => [
+            '%host' => $this->configuration['host'],
+            '%port' => $this->configuration['port'] ?? 21,
+          ],
         ],
-      ]];
+      ];
     }
 
-    return [[
-      'severity' => RfcLogLevel::ERROR,
-      'message' => 'There was an error connecting to the FTP server %host:%port.',
-      'context' => [
-        '%host' => $this->configuration['host'],
-        '%port' => isset($this->configuration['port']) ? $this->configuration['port'] : 21,
+    return [
+      [
+        'severity' => RfcLogLevel::ERROR,
+        'message' => 'There was an error connecting to the FTP server %host:%port.',
+        'context' => [
+          '%host' => $this->configuration['host'],
+          '%port' => $this->configuration['port'] ?? 21,
+        ],
       ],
-    ]];
+    ];
   }
 
 }

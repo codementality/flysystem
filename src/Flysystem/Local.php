@@ -105,29 +105,35 @@ class Local implements FlysystemPluginInterface, ContainerFactoryPluginInterface
    */
   public function ensure($force = FALSE) {
     if (!$this->rootExists) {
-      return [[
-        'severity' => RfcLogLevel::ERROR,
-        'message' => 'The %root directory either does not exist or is not readable and attempts to create it have failed.',
-        'context' => ['%root' => $this->root],
-      ]];
+      return [
+        [
+          'severity' => RfcLogLevel::ERROR,
+          'message' => 'The %root directory either does not exist or is not readable and attempts to create it have failed.',
+          'context' => ['%root' => $this->root],
+        ],
+      ];
     }
 
     if (!$this->writeHtaccess($force)) {
-      return [[
-        'severity' => RfcLogLevel::ERROR,
-        'message' => 'See <a href="@url">@url</a> for information about the recommended .htaccess file which should be added to the %directory directory to help protect against arbitrary code execution.',
-        'context' => [
-          '%directory' => $this->root,
-          '@url' => 'https://www.drupal.org/SA-CORE-2013-003',
+      return [
+        [
+          'severity' => RfcLogLevel::ERROR,
+          'message' => 'See <a href="@url">@url</a> for information about the recommended .htaccess file which should be added to the %directory directory to help protect against arbitrary code execution.',
+          'context' => [
+            '%directory' => $this->root,
+            '@url' => 'https://www.drupal.org/SA-CORE-2013-003',
+          ],
         ],
-      ]];
+      ];
     }
 
-    return [[
-      'severity' => RfcLogLevel::INFO,
-      'message' => 'The directory %root exists and is readable.',
-      'context' => ['%root' => $this->root],
-    ]];
+    return [
+      [
+        'severity' => RfcLogLevel::INFO,
+        'message' => 'The directory %root exists and is readable.',
+        'context' => ['%root' => $this->root],
+      ],
+    ];
   }
 
   /**

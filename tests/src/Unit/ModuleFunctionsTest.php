@@ -3,9 +3,7 @@
 namespace Drupal\Tests\flysystem\Unit;
 
 use Drupal\Core\File\FileSystemInterface;
-use Drupal\Core\Site\Settings;
 use Drupal\Tests\UnitTestCase;
-use Drupal\flysystem\EditorFileReference;
 use Drupal\flysystem\FlysystemFactory;
 use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

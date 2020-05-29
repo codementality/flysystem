@@ -20,9 +20,8 @@ class AssetDumper extends DrupalAssetDumper {
   public function dump($data, $file_extension) {
     // Prefix filename to prevent blocking by firewalls which reject files
     // starting with "ad*".
-    $filename = $file_extension. '_' . Crypt::hashBase64($data) . '.' . $file_extension;
+    $filename = $file_extension . '_' . Crypt::hashBase64($data) . '.' . $file_extension;
     // Create the css/ or js/ path within the files folder.
-
     $path = $this->getSchemeForExtension($file_extension) . '://' . $file_extension;
     $uri = $path . '/' . $filename;
     // Create the CSS or JS file.

@@ -62,10 +62,12 @@ class FlysystemRoutesTest extends UnitTestCase {
    * @covers ::routes
    */
   public function testInvalidSettingsAreSkipped() {
-    new Settings(['flysystem' => [
-      'invalid' => ['driver' => 'local'],
-      'test' => ['driver' => 'local'],
-    ]]);
+    new Settings([
+      'flysystem' => [
+        'invalid' => ['driver' => 'local'],
+        'test' => ['driver' => 'local'],
+      ],
+    ]);
 
     $this->assertSame([], $this->router->routes());
   }
@@ -92,7 +94,8 @@ class FlysystemRoutesTest extends UnitTestCase {
    * @covers ::routes
    */
   public function testLocalPathSameAsPublicIsSkipped() {
-    new Settings(['flysystem' => [
+    new Settings([
+    'flysystem' => [
       'test' => [
         'driver' => 'local',
         'public' => TRUE,
@@ -101,7 +104,8 @@ class FlysystemRoutesTest extends UnitTestCase {
           'root' => 'sites/default/files',
         ],
       ],
-    ]]);
+    ],
+]);
 
     $this->assertSame([], $this->router->routes());
   }
@@ -110,7 +114,8 @@ class FlysystemRoutesTest extends UnitTestCase {
    * @covers ::routes
    */
   public function testValidRoutesReturned() {
-    new Settings(['flysystem' => [
+    new Settings([
+    'flysystem' => [
       'test' => [
         'driver' => 'local',
         'public' => TRUE,
@@ -119,7 +124,8 @@ class FlysystemRoutesTest extends UnitTestCase {
           'root' => 'sites/default/files/flysystem',
         ],
       ],
-    ]]);
+    ],
+]);
 
     $routes = $this->router->routes();
     $this->assertSame(1, count($routes));
@@ -130,7 +136,8 @@ class FlysystemRoutesTest extends UnitTestCase {
    * @covers ::routes
    */
   public function testValidRoutesReturnedWithImageModule() {
-    new Settings(['flysystem' => [
+    new Settings([
+    'flysystem' => [
       'test' => [
         'driver' => 'local',
         'public' => TRUE,
@@ -139,7 +146,8 @@ class FlysystemRoutesTest extends UnitTestCase {
           'root' => 'sites/default/files/flysystem',
         ],
       ],
-    ]]);
+    ],
+]);
 
     $this->moduleHandler->moduleExists('image')->willReturn(TRUE);
     $routes = $this->router->routes();

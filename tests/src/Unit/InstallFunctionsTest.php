@@ -6,7 +6,6 @@ use Drupal\Core\Logger\RfcLogLevel;
 use Drupal\Core\Site\Settings;
 use Drupal\Tests\UnitTestCase;
 use Drupal\flysystem\FlysystemFactory;
-use League\Flysystem\Filesystem;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Twistor\FlysystemStreamWrapper;
 
@@ -72,11 +71,13 @@ class InstallFunctionsTest extends UnitTestCase {
     $dependencies_exist = (int) class_exists(FlysystemStreamWrapper::class);
 
     $this->factory->ensure()->willReturn([
-      'testscheme' => [[
-        'message' => 'Test message',
-        'context' => [],
-        'severity' => RfcLogLevel::ERROR,
-      ]],
+      'testscheme' => [
+        [
+          'message' => 'Test message',
+          'context' => [],
+          'severity' => RfcLogLevel::ERROR,
+        ],
+      ],
     ]);
 
     $return = flysystem_requirements('runtime');

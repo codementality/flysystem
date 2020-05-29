@@ -22,13 +22,15 @@ class LocalPathProcessorTest extends UnitTestCase {
    * {@inheritdoc}
    */
   public function setUp() {
-    new Settings(['flysystem' => [
-      'testscheme' => [
-        'driver' => 'local',
-        'config' => ['root' => 'sites/default/files/flysystem'],
-      ],
-    ]]);
-
+    new Settings(
+      [
+        'flysystem' => [
+          'testscheme' => [
+            'driver' => 'local',
+            'config' => ['root' => 'sites/default/files/flysystem'],
+          ],
+        ],
+      ]);
     $this->processor = new LocalPathProcessor('testscheme');
   }
 

@@ -11,7 +11,7 @@ use Drupal\flysystem\Plugin\FlysystemPluginInterface;
  *
  * @Adapter(id = "missing")
  */
-class Missing Implements FlysystemPluginInterface {
+class Missing implements FlysystemPluginInterface {
 
   /**
    * {@inheritdoc}
@@ -31,11 +31,13 @@ class Missing Implements FlysystemPluginInterface {
    * {@inheritdoc}
    */
   public function ensure($force = FALSE) {
-    return [[
-      'severity' => RfcLogLevel::ERROR,
-      'message' => 'The Flysystem driver is missing.',
-      'context' => [],
-    ]];
+    return [
+      [
+        'severity' => RfcLogLevel::ERROR,
+        'message' => 'The Flysystem driver is missing.',
+        'context' => [],
+      ],
+    ];
   }
 
 }
