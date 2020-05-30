@@ -53,7 +53,7 @@ namespace Drupal\Tests\flysystem\Unit\Asset {
      */
     public function test() {
       file_put_contents('vfs://flysystem/test.js', 'asdfasdf');
-      touch('vfs://flysystem/test.js', REQUEST_TIME - 1000);
+      touch('vfs://flysystem/test.js', \Drupal::time()->getRequestTime() - 1000);
 
       $container = new ContainerBuilder();
       $container->set('config.factory', $this->getConfigFactoryStub([
@@ -64,7 +64,7 @@ namespace Drupal\Tests\flysystem\Unit\Asset {
 
       $grouper = $this->prophesize(AssetCollectionGrouperInterface::class);
       $dumper = new AssetDumper();
-      $state = $this->getMock(StateInterface::class);
+      $state = $this->createMock(StateInterface::class);
 
       $optimizer = new JsCollectionOptimizer($grouper->reveal(), new JsOptimizer(), $dumper, $state);
 
@@ -72,7 +72,7 @@ namespace Drupal\Tests\flysystem\Unit\Asset {
       $this->assertFalse(file_exists('vfs://flysystem/test.js'));
 
       file_put_contents('vfs://flysystem/test.js', 'asdfasdf');
-      touch('vfs://flysystem/test.js', REQUEST_TIME - 1000);
+      touch('vfs://flysystem/test.js', \Drupal::time()->getRequestTime() - 1000);
 
       $optimizer = new CssCollectionOptimizer($grouper->reveal(), new CssOptimizer(), $dumper, $state);
       $optimizer->deleteAll();

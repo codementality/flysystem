@@ -2,6 +2,7 @@
 
 namespace Drupal\flysystem\Form;
 
+use Drupal\Component\Utility\Environment;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -116,7 +117,10 @@ class ConfigForm extends FormBase {
     // @todo We shouldn't do all files in one go, but rather add files and
     // directories and recurse in a batch callback.
     foreach (array_diff($from_files, $to_files) as $filepath) {
-      $batch['operations'][] = [get_class($this) . '::copyFile', [$scheme_from, $scheme_to, $filepath]];
+      $batch['operations'][] = [
+        get_class($this) . '::copyFile',
+        [$scheme_from, $scheme_to, $filepath],
+      ];
     }
 
     batch_set($batch);
@@ -142,7 +146,7 @@ class ConfigForm extends FormBase {
 
     // Copying files could take a very long time. Using streams will keep memory
     // usage down, but we could still timeout.
-    drupal_set_time_limit(0);
+    Environment::setTimeLimit(0);
 
     try {
       $read_handle = $factory->getFilesystem($scheme_from)->readStream($filepath);
@@ -183,26 +187,26 @@ class ConfigForm extends FormBase {
       // An error occurred.
       // $operations contains the operations that remained unprocessed.
       $args = ['%file' => reset($operations)[2]];
-      drupal_set_message(\Drupal::translation()->translate('An error occurred while syncing: %file', $args), 'error');
+      $this->messenger()->addError(\Drupal::translation()->translate('An error occurred while syncing: %file', $args));
       return;
     }
 
     if (empty($results['errors'])) {
-      drupal_set_message(\Drupal::translation()->translate('File synchronization finished successfully.'));
+      $this->messenger()->addStatus(\Drupal::translation()->translate('File synchronization finished successfully.'));
       return;
     }
 
     foreach ($results['errors'] as $error) {
       if (is_array($error)) {
-        drupal_set_message(\Drupal::translation()->translate($error[0], $error[1]), 'error', TRUE);
+        $this->messenger()->addError(\Drupal::translation()->translate($error[0], $error[1]), TRUE);
         \Drupal::logger('flysystem')->error($error[0], $error[1]);
       }
       else {
-        drupal_set_message(Html::escape($error), 'error', TRUE);
+        $this->messenger()->addError(Html::escape($error), TRUE);
       }
     }
 
-    drupal_set_message(\Drupal::translation()->translate('File synchronization experienced errors.'), 'warning');
+    $this->messenger()->addWarning(\Drupal::translation()->translate('File synchronization experienced errors.'));
   }
 
   /**

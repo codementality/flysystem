@@ -56,7 +56,7 @@ class FlysystemFactoryTest extends UnitTestCase {
     parent::setUp();
 
     $this->cache = new NullBackend('bin');
-    $this->eventDispatcher = $this->getMock(EventDispatcherInterface::class);
+    $this->eventDispatcher = $this->createMock(EventDispatcherInterface::class);
 
     $this->plugin_manager = $this->prophesize(PluginManagerInterface::class);
     $this->plugin = $this->prophesize(FlysystemPluginInterface::class);

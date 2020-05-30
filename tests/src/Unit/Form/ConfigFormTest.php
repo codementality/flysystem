@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\flysystem\Unit\Form {
 
+  use function Drupal\flysystem\Form\batch_set;
   use Drupal\Core\Form\FormState;
   use Drupal\Core\Logger\LoggerChannelFactoryInterface;
   use Drupal\Tests\UnitTestCase;
@@ -120,7 +121,7 @@ namespace Drupal\Tests\flysystem\Unit\Form {
       $form_state->setValue('sync_to', 'to_empty');
 
       $this->form->submitForm($form, $form_state);
-      $batch = \Drupal\flysystem\Form\batch_set();
+      $batch = batch_set();
 
       $this->assertSame(ConfigForm::class . '::finishBatch', $batch['finished']);
       $this->assertSame(0, count($batch['operations']));
@@ -137,7 +138,7 @@ namespace Drupal\Tests\flysystem\Unit\Form {
 
       $batch_files = array_map(function (array $operation) {
         return $operation[1][2];
-      }, \Drupal\flysystem\Form\batch_set()['operations']);
+      }, batch_set()['operations']);
 
       $this->assertSame(['dir/test.txt', 'test.txt'], $batch_files);
 
@@ -149,7 +150,7 @@ namespace Drupal\Tests\flysystem\Unit\Form {
 
       $batch_files = array_map(function (array $operation) {
         return $operation[1][2];
-      }, \Drupal\flysystem\Form\batch_set()['operations']);
+      }, batch_set()['operations']);
 
       $this->assertSame(['dir/test.txt', 'test.txt'], $batch_files);
     }

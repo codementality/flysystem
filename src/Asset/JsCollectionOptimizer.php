@@ -16,13 +16,15 @@ class JsCollectionOptimizer extends DrupalJsCollectionOptimizer {
    */
   public function deleteAll() {
     $this->state->delete('system.js_cache_files');
-    $delete_stale = function ($uri) {
+    /** @var \Drupal\Core\File\FileSystem $file_system */
+    $file_system = \Drupal::service('file_system');
+    $delete_stale = function ($uri) use ($file_system) {
       // Default stale file threshold is 30 days.
-      if (REQUEST_TIME - filemtime($uri) > \Drupal::config('system.performance')->get('stale_file_threshold')) {
-        file_unmanaged_delete($uri);
+      if (\Drupal::time()->getRequestTime() - filemtime($uri) > \Drupal::config('system.performance')->get('stale_file_threshold')) {
+        $file_system->delete($uri);
       }
     };
-    file_scan_directory($this->getSchemeForExtension('js') . '://js', '/.*/', ['callback' => $delete_stale]);
+    $file_system->scanDirectory($this->getSchemeForExtension('js') . '://js', '/.*/', ['callback' => $delete_stale]);
   }
 
 }

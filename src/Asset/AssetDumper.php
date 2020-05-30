@@ -2,6 +2,7 @@
 
 namespace Drupal\flysystem\Asset;
 
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\Component\Utility\Crypt;
 use Drupal\Core\Asset\AssetDumper as DrupalAssetDumper;
 
@@ -25,8 +26,8 @@ class AssetDumper extends DrupalAssetDumper {
     $path = $this->getSchemeForExtension($file_extension) . '://' . $file_extension;
     $uri = $path . '/' . $filename;
     // Create the CSS or JS file.
-    file_prepare_directory($path, FILE_CREATE_DIRECTORY);
-    if (!file_exists($uri) && !file_unmanaged_save_data($data, $uri, FILE_EXISTS_REPLACE)) {
+    \Drupal::service('file_system')->prepareDirectory($path, FileSystemInterface::CREATE_DIRECTORY);
+    if (!file_exists($uri) && !\Drupal::service('file_system')->saveData($data, $uri, FileSystemInterface::EXISTS_REPLACE)) {
       return FALSE;
     }
     // If CSS/JS gzip compression is enabled and the zlib extension is available
@@ -38,7 +39,7 @@ class AssetDumper extends DrupalAssetDumper {
     // aren't working can set css.gzip to FALSE in order to skip
     // generating a file that won't be used.
     if (extension_loaded('zlib') && \Drupal::config('system.performance')->get($file_extension . '.gzip')) {
-      if (!file_exists($uri . '.gz') && !file_unmanaged_save_data(gzencode($data, 9, FORCE_GZIP), $uri . '.gz', FILE_EXISTS_REPLACE)) {
+      if (!file_exists($uri . '.gz') && !\Drupal::service('file_system')->saveData(gzencode($data, 9, FORCE_GZIP), $uri . '.gz', FileSystemInterface::EXISTS_REPLACE)) {
         return FALSE;
       }
     }

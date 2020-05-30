@@ -3,8 +3,9 @@
 namespace Drupal\Tests\flysystem\Unit\Plugin;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
-use Drupal\Core\Entity\EntityManagerInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Entity\EntityTypeRepositoryInterface;
 use Drupal\Core\Lock\LockBackendInterface;
 use Drupal\Core\Lock\NullLockBackend;
 use Drupal\Tests\UnitTestCase;
@@ -40,11 +41,13 @@ class ImageStyleGenerationTraitTest extends UnitTestCase {
     $storage->load('pass')->willReturn($image_style->reveal());
     $storage->load('fail')->willReturn(FALSE);
 
-    $entity_manager = $this->prophesize(EntityManagerInterface::class);
-    $entity_manager->getEntityTypeFromClass(ImageStyle::class)->willReturn('image_style');
-    $entity_manager->getStorage('image_style')->willReturn($storage->reveal());
+    $entity_type_manager = $this->prophesize(EntityTypeManagerInterface::class);
+    $entity_tyep_repository = $this->prophesize(EntityTypeRepositoryInterface::class);
+    $entity_tyep_repository->getEntityTypeFromClass(ImageStyle::class)->willReturn('image_style');
+    $entity_type_manager->getStorage('image_style')->willReturn($storage->reveal());
 
-    $container->set('entity.manager', $entity_manager->reveal());
+    $container->set('entity_type.repository', $entity_tyep_repository->reveal());
+    $container->set('entity_type.manager', $entity_type_manager->reveal());
     $container->set('lock', new NullLockBackend());
 
     \Drupal::setContainer($container);

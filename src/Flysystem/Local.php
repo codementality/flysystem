@@ -2,7 +2,7 @@
 
 namespace Drupal\flysystem\Flysystem;
 
-use Drupal\Component\PhpStorage\FileStorage;
+use Drupal\Component\FileSecurity\FileSecurity;
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\File\FileSystem;
 use Drupal\Core\Logger\RfcLogLevel;
@@ -184,8 +184,7 @@ class Local implements FlysystemPluginInterface, ContainerFactoryPluginInterface
     if (file_exists($htaccess_path)) {
       chmod($htaccess_path, 0666);
     }
-
-    return @file_put_contents($htaccess_path, FileStorage::htaccessLines(!$this->isPublic)) && chmod($htaccess_path, 0444);
+    return @file_put_contents($htaccess_path, FileSecurity::htaccessLines(!$this->isPublic)) && chmod($htaccess_path, 0444);
   }
 
 }

@@ -22,7 +22,7 @@ class EnsureSubscriberTest extends UnitTestCase {
    */
   public function testLoggingHappens() {
     $logger = $this->prophesize(LoggerInterface::class);
-    $dispatcher = $this->getMock(EventDispatcherInterface::class);
+    $dispatcher = $this->createMock(EventDispatcherInterface::class);
     $logger->log('severity', 'message', ['context'])->shouldBeCalled();
 
     $event = new EnsureEvent('scheme', 'severity', 'message', ['context']);

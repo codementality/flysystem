@@ -19,7 +19,7 @@ class FlysystemPluginManagerTest extends UnitTestCase {
   public function test() {
     $namespaces = new \ArrayObject();
     $cache_backend = new MemoryBackend('bin');
-    $module_handle = $this->getMock(ModuleHandlerInterface::class);
+    $module_handle = $this->createMock(ModuleHandlerInterface::class);
 
     $manager = new FlysystemPluginManager($namespaces, $cache_backend, $module_handle);
     $this->assertSame('missing', $manager->getFallbackPluginId('beep'));

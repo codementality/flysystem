@@ -97,8 +97,12 @@ class FlysystemFactory {
     // Apply defaults and validate registered services.
     foreach (Settings::get('flysystem', []) as $scheme => $configuration) {
 
+      // TODO: use DI.
+      /** @var \Drupal\Core\StreamWrapper\StreamWrapperManager $stream_wrapper_manager */
+      $stream_wrapper_manager = \Drupal::service('stream_wrapper_manager');
+
       // The settings.php file could be changed before rebuilding the container.
-      if (!$filesystem->validScheme($scheme)) {
+      if (!$stream_wrapper_manager->isValidScheme($scheme)) {
         continue;
       }
 
