@@ -46,12 +46,15 @@ namespace Drupal\Tests\flysystem\Unit\Form {
       $this->factory->getFilesystem('to_empty')->willReturn(new Filesystem(new MemoryAdapter()));
       $this->factory->getSchemes()->willReturn(['from_empty', 'to_empty']);
 
+
       $this->form = new ConfigForm($this->factory->reveal());
       $this->form->setStringTranslation($this->getStringTranslationStub());
+      $messenger = $this->prophesize(\Drupal\Core\Messenger\MessengerInterface::class);
 
       $container = new ContainerBuilder();
       $container->set('string_translation', $this->getStringTranslationStub());
       $container->set('flysystem_factory', $this->factory->reveal());
+      $container->set('messenger', $messenger->reveal());
 
       $logger = $this->prophesize(LoggerChannelFactoryInterface::class);
       $logger->get('flysystem')->willReturn($this->prophesize(LoggerInterface::class)->reveal());
@@ -231,6 +234,8 @@ namespace Drupal\Tests\flysystem\Unit\Form {
           'first error',
           ['second error', ['']]],
       ], []);
+      // TODO: refactor.
+      $this->assertTrue(TRUE);
     }
 
     /**
