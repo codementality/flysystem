@@ -183,30 +183,30 @@ class ConfigForm extends FormBase {
    * Finish batch.
    */
   public static function finishBatch($success, array $results, array $operations) {
+    $messenger = \Drupal::messenger();
     if (!$success) {
       // An error occurred.
       // $operations contains the operations that remained unprocessed.
       $args = ['%file' => reset($operations)[2]];
-      $this->messenger()->addError(\Drupal::translation()->translate('An error occurred while syncing: %file', $args));
+      $messenger->addError(\Drupal::translation()->translate('An error occurred while syncing: %file', $args));
       return;
     }
 
     if (empty($results['errors'])) {
-      $this->messenger()->addStatus(\Drupal::translation()->translate('File synchronization finished successfully.'));
+      $messenger->addStatus(\Drupal::translation()->translate('File synchronization finished successfully.'));
       return;
     }
 
     foreach ($results['errors'] as $error) {
       if (is_array($error)) {
-        $this->messenger()->addError(\Drupal::translation()->translate($error[0], $error[1]), TRUE);
+        $messenger->addError(\Drupal::translation()->translate($error[0], $error[1]), TRUE);
         \Drupal::logger('flysystem')->error($error[0], $error[1]);
       }
       else {
-        $this->messenger()->addError(Html::escape($error), TRUE);
+        $messenger->addError(Html::escape($error), TRUE);
       }
     }
-
-    $this->messenger()->addWarning(\Drupal::translation()->translate('File synchronization experienced errors.'));
+    $messenger->addWarning(\Drupal::translation()->translate('File synchronization experienced errors.'));
   }
 
   /**
