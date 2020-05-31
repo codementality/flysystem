@@ -6,6 +6,7 @@ use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\Core\Cache\NullBackend;
 use Drupal\Core\File\FileSystemInterface as CoreFileSystemInterface;
 use Drupal\Core\Site\Settings;
+use Drupal\Core\StreamWrapper\StreamWrapperManager;
 use Drupal\Tests\UnitTestCase;
 use Drupal\flysystem\FlysystemFactory;
 use Drupal\flysystem\Flysystem\Adapter\DrupalCacheAdapter;
@@ -47,7 +48,7 @@ class FlysystemFactoryTest extends UnitTestCase {
   /**
    * @var \Prophecy\Prophecy\ObjectProphecy
    */
-  protected $plguinManager;
+  protected $pluginManager;
 
   /**
    * {@inheritdoc}
@@ -58,15 +59,15 @@ class FlysystemFactoryTest extends UnitTestCase {
     $this->cache = new NullBackend('bin');
     $this->eventDispatcher = $this->createMock(EventDispatcherInterface::class);
 
-    $this->plugin_manager = $this->prophesize(PluginManagerInterface::class);
+    $this->pluginManager = $this->prophesize(PluginManagerInterface::class);
     $this->plugin = $this->prophesize(FlysystemPluginInterface::class);
     $this->plugin->getAdapter()->willReturn(new NullAdapter());
 
-    $this->plugin_manager->createInstance('testdriver', [])->willReturn($this->plugin->reveal());
-    $this->plugin_manager->createInstance('', [])->willReturn(new Missing());
+    $this->pluginManager->createInstance('testdriver', [])->willReturn($this->plugin->reveal());
+    $this->pluginManager->createInstance('', [])->willReturn(new Missing());
 
-    $this->filesystem = $this->prophesize(CoreFileSystemInterface::class);
-    $this->filesystem->validScheme(Argument::type('string'))->willReturn(TRUE);
+    $this->filesystem = $this->prophesize(StreamWrapperManager::class);
+    $this->filesystem->isValidScheme(Argument::type('string'))->willReturn(TRUE);
   }
 
   /**
@@ -119,7 +120,7 @@ class FlysystemFactoryTest extends UnitTestCase {
    */
   public function testGetFilesystemReturnsReplicateAdapter() {
     // Test replicate.
-    $this->plugin_manager->createInstance('wrapped', [])->willReturn($this->plugin->reveal());
+    $this->pluginManager->createInstance('wrapped', [])->willReturn($this->plugin->reveal());
 
     new Settings([
       'flysystem' => [
@@ -144,7 +145,7 @@ class FlysystemFactoryTest extends UnitTestCase {
       ],
     ]);
 
-    $this->filesystem->validScheme('invalidscheme')->willReturn(FALSE);
+    $this->filesystem->isValidScheme('invalidscheme')->willReturn(FALSE);
 
     $this->assertSame(['testscheme'], $this->getFactory()->getSchemes());
   }
@@ -184,7 +185,7 @@ class FlysystemFactoryTest extends UnitTestCase {
    */
   protected function getFactory() {
     return new FlysystemFactory(
-      $this->plugin_manager->reveal(),
+      $this->pluginManager->reveal(),
       $this->filesystem->reveal(),
       $this->cache,
       $this->eventDispatcher

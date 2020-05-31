@@ -16,7 +16,7 @@ services:
 
   flysystem_factory:
     class: Drupal\flysystem\FlysystemFactory
-    arguments: ['@plugin.manager.flysystem', '@file_system', '@cache.flysystem', '@event_dispatcher']
+    arguments: ['@plugin.manager.flysystem', '@stream_wrapper_manager', '@cache.flysystem', '@event_dispatcher']
 
   path_processor.flysystem:
     class: Drupal\flysystem\PathProcessor\FlysystemPathProcessor

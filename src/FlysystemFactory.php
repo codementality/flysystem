@@ -6,6 +6,7 @@ use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Site\Settings;
+use Drupal\Core\StreamWrapper\StreamWrapperManagerInterface;
 use Drupal\flysystem\Event\EnsureEvent;
 use Drupal\flysystem\Event\FlysystemEvents;
 use Drupal\flysystem\Flysystem\Adapter\CacheItemBackend;
@@ -82,24 +83,20 @@ class FlysystemFactory {
    *
    * @param \Drupal\Component\Plugin\PluginManagerInterface $plugin_manager
    *   The plugin manager.
-   * @param \Drupal\Core\File\FileSystemInterface $filesystem
-   *   The Drupal filesystem service.
+   * @param \Drupal\Core\StreamWrapper\StreamWrapperManagerInterface $stream_wrapper_manager
+   *   The stream wrapper manager service.
    * @param \Drupal\Core\Cache\CacheBackendInterface $cache
    *   The cache backend.
    * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $event_dispatcher
    *   The event dispatcher.
    */
-  public function __construct(PluginManagerInterface $plugin_manager, FileSystemInterface $filesystem, CacheBackendInterface $cache, EventDispatcherInterface $event_dispatcher) {
+  public function __construct(PluginManagerInterface $plugin_manager, StreamWrapperManagerInterface $stream_wrapper_manager, CacheBackendInterface $cache, EventDispatcherInterface $event_dispatcher) {
     $this->pluginManager = $plugin_manager;
     $this->cacheBackend = $cache;
     $this->eventDispatcher = $event_dispatcher;
 
     // Apply defaults and validate registered services.
     foreach (Settings::get('flysystem', []) as $scheme => $configuration) {
-
-      // TODO: use DI.
-      /** @var \Drupal\Core\StreamWrapper\StreamWrapperManager $stream_wrapper_manager */
-      $stream_wrapper_manager = \Drupal::service('stream_wrapper_manager');
 
       // The settings.php file could be changed before rebuilding the container.
       if (!$stream_wrapper_manager->isValidScheme($scheme)) {
