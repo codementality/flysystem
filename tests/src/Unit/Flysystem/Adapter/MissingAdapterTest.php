@@ -22,7 +22,7 @@ class MissingAdapterTest extends UnitTestCase {
     $this->assertFalse($adapter->createDir('', new Config()));
     $this->assertFalse($adapter->delete(''));
     $this->assertFalse($adapter->deleteDir(''));
-    $this->assertInternalType('array', $adapter->listContents(''));
+    $this->assertIsArray($adapter->listContents(''));
     $this->assertFalse($adapter->getMetadata(''));
     $this->assertFalse($adapter->getMimetype(''));
     $this->assertFalse($adapter->getSize(''));

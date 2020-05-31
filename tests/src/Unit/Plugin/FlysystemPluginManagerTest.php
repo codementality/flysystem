@@ -23,7 +23,7 @@ class FlysystemPluginManagerTest extends UnitTestCase {
 
     $manager = new FlysystemPluginManager($namespaces, $cache_backend, $module_handle);
     $this->assertSame('missing', $manager->getFallbackPluginId('beep'));
-    $this->assertInternalType('array', $manager->getDefinitions());
+    $this->assertIsArray($manager->getDefinitions());
 
     // Test alterDefinitions().
     $method = new \ReflectionMethod($manager, 'alterDefinitions');
