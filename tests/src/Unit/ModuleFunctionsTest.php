@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\flysystem\Unit;
 
-use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\StreamWrapper\StreamWrapperManagerInterface;
 use Drupal\Tests\UnitTestCase;
 use Drupal\flysystem\FlysystemFactory;
 use Prophecy\Argument;
@@ -36,8 +36,8 @@ class ModuleFunctionsTest extends UnitTestCase {
     $this->factory = $this->prophesize(FlysystemFactory::class);
     $this->factory->getSchemes()->willReturn(['vfs']);
 
-    $file_system_helper = $this->prophesize(FileSystemInterface::class);
-    $file_system_helper->uriScheme(Argument::type('string'))->will(function ($uri) {
+    $file_system_helper = $this->prophesize(StreamWrapperManagerInterface::class);
+    $file_system_helper->isValidScheme(Argument::type('string'))->will(function ($uri) {
       list($scheme) = explode('://', $uri[0]);
       return $scheme;
     });
