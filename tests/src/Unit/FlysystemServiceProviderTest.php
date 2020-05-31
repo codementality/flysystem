@@ -43,6 +43,7 @@ class FlysystemServiceProviderTest extends UnitTestCase {
   public function testNothingFailsIfContainerIsEmpty() {
     new Settings([]);
     (new FlysystemServiceProvider())->register($this->container);
+    $this->assertFalse($this->container->has('flysystem_stream_wrapper'));
   }
 
   /**
