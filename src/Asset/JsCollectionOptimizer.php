@@ -25,7 +25,10 @@ class JsCollectionOptimizer extends DrupalJsCollectionOptimizer {
         $file_system->delete($uri);
       }
     };
-    $file_system->scanDirectory($this->getSchemeForExtension('js') . '://js', '/.*/', ['callback' => $delete_stale]);
+    $js_dir = $this->getSchemeForExtension('js') . '://js';
+    if (is_dir($js_dir)) {
+      $file_system->scanDirectory($js_dir, '/.*/', ['callback' => $delete_stale]);
+    }
   }
 
 }

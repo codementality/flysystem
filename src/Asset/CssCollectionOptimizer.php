@@ -25,7 +25,10 @@ class CssCollectionOptimizer extends DrupalCssCollectionOptimizer {
         $file_system->delete($uri);
       }
     };
-    $file_system->scanDirectory($this->getSchemeForExtension('css') . '://css', '/.*/', ['callback' => $delete_stale]);
+    $css_dir = $this->getSchemeForExtension('css') . '://css';
+    if (is_dir($css_dir)) {
+      $file_system->scanDirectory($css_dir, '/.*/', ['callback' => $delete_stale]);
+    }
   }
 
 }
