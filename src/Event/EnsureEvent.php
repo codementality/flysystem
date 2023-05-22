@@ -2,7 +2,7 @@
 
 namespace Drupal\flysystem\Event;
 
-use Symfony\Component\EventDispatcher\Event;
+use Drupal\Component\EventDispatcher\Event;
 
 /**
  * The event fired for every result from an ensure() call.
