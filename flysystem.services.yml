@@ -21,7 +21,7 @@ services:
   path_processor.flysystem:
     class: Drupal\flysystem\PathProcessor\FlysystemPathProcessor
     tags:
-      - { name: path_processor_inbound, priority: 400 }
+      - { name: path_processor_inbound, priority: 200 }
 
   flysystem.ensure_subscriber:
     class: Drupal\flysystem\EventSubscriber\EnsureSubscriber
