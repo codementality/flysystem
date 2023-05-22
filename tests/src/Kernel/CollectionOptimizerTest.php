@@ -23,15 +23,28 @@ class CollectionOptimizerTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  protected static $modules = ['file'];
+
+  /**
+   * The file URL generator.
+   *
+   * @var \Drupal\Core\File\FileUrlGeneratorInterface
+   */
+  protected $fileUrlGenerator;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp(): void {
     parent::setUp();
+    $this->fileUrlGenerator = $this->container->get('file_url_generator');
     $this->cleanUp();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function tearDown() {
+  public function tearDown(): void {
     $this->cleanUp();
     parent::tearDown();
   }
@@ -68,7 +81,7 @@ class CollectionOptimizerTest extends KernelTestBase {
 
     foreach ($this->jsFilesUnderTest() as $js_file => $expired) {
       if ($expired === TRUE) {
-        $this->assertFileNotExists($js_file);
+        $this->assertFileDoesNotExist($js_file);
         continue;
       }
       $this->assertFileExists($js_file);
@@ -103,12 +116,12 @@ class CollectionOptimizerTest extends KernelTestBase {
     $dumper = $this->prophesize(AssetDumper::class);
     $state = $this->prophesize(StateInterface::class);
 
-    $optimizer = new CssCollectionOptimizer($grouper->reveal(), new CssOptimizer(), $dumper->reveal(), $state->reveal(), $this->container->get('file_system'));
+    $optimizer = new CssCollectionOptimizer($grouper->reveal(), new CssOptimizer($this->fileUrlGenerator), $dumper->reveal(), $state->reveal(), $this->container->get('file_system'));
     $optimizer->deleteAll();
 
     foreach ($this->cssFilesUnderTest() as $css_file => $expired) {
       if ($expired === TRUE) {
-        $this->assertFileNotExists($css_file);
+        $this->assertFileDoesNotExist($css_file);
         continue;
       }
       $this->assertFileExists($css_file);

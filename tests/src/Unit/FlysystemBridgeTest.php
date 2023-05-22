@@ -18,11 +18,15 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class FlysystemBridgeTest extends UnitTestCase {
 
   /**
+   * Flysystem Bridge.
+   *
    * @var \Drupal\flysystem\FlysystemBridge
    */
   protected $bridge;
 
   /**
+   * File system.
+   *
    * @var \League\Flysystem\FilesystemInterface
    */
   protected $filesystem;
@@ -30,7 +34,7 @@ class FlysystemBridgeTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
     $this->bridge = new FlysystemBridge();
     $this->bridge->setStringTranslation($this->getStringTranslationStub());
@@ -43,7 +47,10 @@ class FlysystemBridgeTest extends UnitTestCase {
 
     $factory->getFilesystem('testscheme')->willReturn($this->filesystem);
 
-    $factory->getSettings('testscheme')->willReturn(['name' => '', 'description' => '']);
+    $factory->getSettings('testscheme')->willReturn([
+      'name' => '',
+      'description' => '',
+    ]);
 
     $container = new ContainerBuilder();
     $container->set('flysystem_factory', $factory->reveal());

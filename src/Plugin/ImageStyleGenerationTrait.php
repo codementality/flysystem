@@ -24,7 +24,7 @@ trait ImageStyleGenerationTrait {
       return FALSE;
     }
 
-    list(, $style, $scheme, $file) = explode('/', $target, 4);
+    [, $style, $scheme, $file] = explode('/', $target, 4);
 
     if (!$image_style = ImageStyle::load($style)) {
       return FALSE;

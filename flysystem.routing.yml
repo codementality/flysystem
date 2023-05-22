@@ -4,6 +4,7 @@ flysystem.files:
     _controller: 'Drupal\system\FileDownloadController::download'
     _disable_route_normalizer: 'TRUE'
   requirements:
+    # Permissions are handled through Drupal file create / update permissions
     _access: 'TRUE'
     scheme: '^[a-zA-Z0-9+.-]+$'
 
@@ -13,6 +14,7 @@ flysystem.serve:
     _controller: 'Drupal\system\FileDownloadController::download'
     _disable_route_normalizer: 'TRUE'
   requirements:
+  # Permissions are handled through Drupal access content permissions
     _access: 'TRUE'
     scheme: '^[a-zA-Z0-9+.-]+$'
     filepath: .+

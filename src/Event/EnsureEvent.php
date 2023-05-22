@@ -60,6 +60,7 @@ class EnsureEvent extends Event {
    * Returns the context.
    *
    * @return array
+   *   Context.
    */
   public function getContext() {
     return $this->context;
@@ -69,6 +70,7 @@ class EnsureEvent extends Event {
    * Returns the message.
    *
    * @return string
+   *   The message text.
    */
   public function getMessage() {
     return $this->message;
@@ -78,6 +80,7 @@ class EnsureEvent extends Event {
    * Returns the scheme.
    *
    * @return string
+   *   The scheme identifier.
    */
   public function getScheme() {
     return $this->scheme;
@@ -87,6 +90,7 @@ class EnsureEvent extends Event {
    * Returns the severity.
    *
    * @return int
+   *   The severity.
    */
   public function getSeverity() {
     return $this->severity;

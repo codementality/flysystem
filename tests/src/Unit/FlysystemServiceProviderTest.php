@@ -33,7 +33,7 @@ class FlysystemServiceProviderTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     $this->container = new ContainerBuilder();
   }
 
@@ -102,7 +102,14 @@ class FlysystemServiceProviderTest extends UnitTestCase {
     $this->assertSame(JsCollectionOptimizer::class, $this->container->getDefinition('asset.js.collection_optimizer')->getClass());
 
     // A successful swap.
-    new Settings(['flysystem' => ['testscheme' => ['driver' => 'whatever', 'serve_js' => TRUE]]]);
+    new Settings([
+      'flysystem' => [
+        'testscheme' => [
+          'driver' => 'whatever',
+          'serve_js' => TRUE,
+        ],
+      ],
+    ]);
     (new FlysystemServiceProvider())->register($this->container);
     $this->assertSame(FlysystemAssetDumper::class, $this->container->getDefinition('asset.js.dumper')->getClass());
     $this->assertSame(FlysystemJsCollectionOptimizer::class, $this->container->getDefinition('asset.js.collection_optimizer')->getClass());
@@ -117,7 +124,14 @@ class FlysystemServiceProviderTest extends UnitTestCase {
     $this->container->register('asset.css.collection_optimizer', CssCollectionOptimizer::class);
     $this->container->register('asset.css.optimizer', CssOptimizer::class);
 
-    new Settings(['flysystem' => ['testscheme' => ['driver' => 'whatever', 'serve_css' => TRUE]]]);
+    new Settings([
+      'flysystem' => [
+        'testscheme' => [
+          'driver' => 'whatever',
+          'serve_css' => TRUE,
+        ],
+      ],
+    ]);
 
     (new FlysystemServiceProvider())->register($this->container);
 

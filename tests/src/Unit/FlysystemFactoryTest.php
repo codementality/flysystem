@@ -4,7 +4,6 @@ namespace Drupal\Tests\flysystem\Unit;
 
 use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\Core\Cache\NullBackend;
-use Drupal\Core\File\FileSystemInterface as CoreFileSystemInterface;
 use Drupal\Core\Site\Settings;
 use Drupal\Core\StreamWrapper\StreamWrapperManager;
 use Drupal\Tests\UnitTestCase;
@@ -26,26 +25,36 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class FlysystemFactoryTest extends UnitTestCase {
 
   /**
+   * Backend Cache.
+   *
    * @var \Drupal\Core\Cache\CacheBackendInterface
    */
   protected $cache;
 
   /**
+   * Event Dispatcher.
+   *
    * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
    */
   protected $eventDispatcher;
 
   /**
+   * Mocked File System.
+   *
    * @var \Prophecy\Prophecy\ObjectProphecy
    */
   protected $filesystem;
 
   /**
+   * Mocked Plugin.
+   *
    * @var \Prophecy\Prophecy\ObjectProphecy
    */
   protected $plugin;
 
   /**
+   * Mocked Plugin Manager.
+   *
    * @var \Prophecy\Prophecy\ObjectProphecy
    */
   protected $pluginManager;
@@ -53,7 +62,7 @@ class FlysystemFactoryTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
 
     $this->cache = new NullBackend('bin');
@@ -181,7 +190,10 @@ class FlysystemFactoryTest extends UnitTestCase {
   }
 
   /**
+   * Gets and returns the Flysystem Factory.
+   *
    * @return \Drupal\flysystem\FlysystemFactory
+   *   Flysystem Factory.
    */
   protected function getFactory() {
     return new FlysystemFactory(

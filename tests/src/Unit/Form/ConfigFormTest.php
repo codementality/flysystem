@@ -5,6 +5,7 @@ namespace Drupal\Tests\flysystem\Unit\Form {
   use function Drupal\flysystem\Form\batch_set;
   use Drupal\Core\Form\FormState;
   use Drupal\Core\Logger\LoggerChannelFactoryInterface;
+  use Drupal\Core\Messenger\MessengerInterface;
   use Drupal\Tests\UnitTestCase;
   use Drupal\flysystem\FlysystemFactory;
   use Drupal\flysystem\Form\ConfigForm;
@@ -38,7 +39,7 @@ namespace Drupal\Tests\flysystem\Unit\Form {
     /**
      * {@inheritdoc}
      */
-    public function setUp() {
+    public function setUp(): void {
       parent::setUp();
 
       $this->factory = $this->prophesize(FlysystemFactory::class);
@@ -46,10 +47,9 @@ namespace Drupal\Tests\flysystem\Unit\Form {
       $this->factory->getFilesystem('to_empty')->willReturn(new Filesystem(new MemoryAdapter()));
       $this->factory->getSchemes()->willReturn(['from_empty', 'to_empty']);
 
-
       $this->form = new ConfigForm($this->factory->reveal());
       $this->form->setStringTranslation($this->getStringTranslationStub());
-      $messenger = $this->prophesize(\Drupal\Core\Messenger\MessengerInterface::class);
+      $messenger = $this->prophesize(MessengerInterface::class);
 
       $container = new ContainerBuilder();
       $container->set('string_translation', $this->getStringTranslationStub());
@@ -232,9 +232,12 @@ namespace Drupal\Tests\flysystem\Unit\Form {
       ConfigForm::finishBatch(TRUE, [
         'errors' => [
           'first error',
-          ['second error', ['']]],
+          [
+            'second error', [''],
+          ],
+        ],
       ], []);
-      // TODO: refactor.
+      // @todo refactor.
       $this->assertTrue(TRUE);
     }
 
@@ -262,9 +265,15 @@ namespace Drupal\Tests\flysystem\Unit\Form {
 
 namespace Drupal\flysystem\Form {
 
+  /**
+   * Override for drupal_set_message().
+   */
   function drupal_set_message() {
   }
 
+  /**
+   * Mock batch_set() for testing.
+   */
   function batch_set($batch = NULL) {
     static $last_batch;
 
@@ -274,12 +283,18 @@ namespace Drupal\flysystem\Form {
     return $last_batch;
   }
 
+  /**
+   * Override for drupal_set_time_limit().
+   */
   function drupal_set_time_limit($limit) {
     if ($limit !== 0) {
       throw new \Exception();
     }
   }
 
+  /**
+   * Override for Watchdog exception().
+   */
   function watchdog_exception() {
   }
 

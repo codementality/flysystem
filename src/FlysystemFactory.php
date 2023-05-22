@@ -4,7 +4,6 @@ namespace Drupal\flysystem;
 
 use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\Core\Cache\CacheBackendInterface;
-use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Site\Settings;
 use Drupal\Core\StreamWrapper\StreamWrapperManagerInterface;
 use Drupal\flysystem\Event\EnsureEvent;
@@ -163,7 +162,7 @@ class FlysystemFactory {
    *   The settings array from settings.php.
    */
   public function getSettings($scheme) {
-    return isset($this->settings[$scheme]) ? $this->settings[$scheme] : $this->defaults;
+    return $this->settings[$scheme] ?? $this->defaults;
   }
 
   /**

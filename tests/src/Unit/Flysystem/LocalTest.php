@@ -21,7 +21,7 @@ class LocalTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
     $GLOBALS['base_url'] = 'http://example.com';
 
@@ -42,7 +42,7 @@ class LocalTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function tearDown() {
+  public function tearDown(): void {
     (new LocalAdapter('foo'))->deleteDir('');
     @rmdir('foo');
 
@@ -103,7 +103,7 @@ class LocalTest extends UnitTestCase {
    * @covers ::ensureDirectory
    */
   public function testDirectoryIsAutoCreatedAndHtaccessIsWritten() {
-    $plugin = new Local('does_not_exist');
+    new Local('does_not_exist');
     $this->assertTrue(is_dir('does_not_exist'));
     $this->assertTrue(is_file('does_not_exist/.htaccess'));
 

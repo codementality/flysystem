@@ -32,7 +32,7 @@ class FlysystemPathProcessor implements InboundPathProcessorInterface {
 
     // Support image styles.
     if (strpos($rest, 'styles/') === 0 && substr_count($rest, '/') >= 3) {
-      list(, $image_style, $scheme, $file) = explode('/', $rest, 4);
+      [, $image_style, $scheme, $file] = explode('/', $rest, 4);
 
       // Set the file as query parameter.
       $request->query->set('file', $file);

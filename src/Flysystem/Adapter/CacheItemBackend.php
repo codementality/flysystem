@@ -31,6 +31,8 @@ class CacheItemBackend {
   /**
    * Constructs a new CacheItemBackend.
    *
+   * @param string $scheme
+   *   The scheme being managed by the cache.
    * @param \Drupal\Core\Cache\CacheBackendInterface $cacheBackend
    *   The Drupal cache backend to store items in.
    */

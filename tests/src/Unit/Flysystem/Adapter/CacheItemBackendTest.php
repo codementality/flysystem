@@ -8,6 +8,8 @@ use Drupal\flysystem\Flysystem\Adapter\CacheItem;
 use Drupal\flysystem\Flysystem\Adapter\CacheItemBackend;
 
 /**
+ * Tests \Drupal\flysystem\Flysystem\Adapter\CacheItemBackend.
+ *
  * @group flysystem
  *
  * @coversDefaultClass \Drupal\flysystem\Flysystem\Adapter\CacheItemBackend
@@ -32,7 +34,7 @@ class CacheItemBackendTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setup() {
+  public function setup(): void {
     $this->cacheBackend = new MemoryBackend('foo');
     $this->cacheItemBackend = new CacheItemBackend('test-scheme', $this->cacheBackend);
   }

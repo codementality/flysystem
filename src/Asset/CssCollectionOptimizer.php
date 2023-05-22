@@ -26,7 +26,8 @@ class CssCollectionOptimizer extends DrupalCssCollectionOptimizer {
       if (\Drupal::time()->getRequestTime() - filemtime($uri) > $stale_file_threshold) {
         try {
           $file_system->delete($uri);
-        } catch (\Exception $e) {
+        }
+        catch (\Exception $e) {
           $this->getLogger('flysystem')->error($e->getMessage());
         }
       }

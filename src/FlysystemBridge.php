@@ -26,10 +26,10 @@ class FlysystemBridge extends FlysystemStreamWrapper implements StreamWrapperInt
    */
   public function getName() {
     $scheme = $this->getProtocol();
-    $name = (string) $this->getFactory()->getSettings($scheme)['name'];
+    $name = $this->getFactory()->getSettings($scheme)['name'];
     $default = $this->t('Flysystem: @scheme', ['@scheme' => $scheme]);
 
-    return $name !== '' ? $this->t($name) : $default;
+    return $name !== '' ? $name : $default;
   }
 
   /**
@@ -37,10 +37,10 @@ class FlysystemBridge extends FlysystemStreamWrapper implements StreamWrapperInt
    */
   public function getDescription() {
     $scheme = $this->getProtocol();
-    $description = (string) $this->getFactory()->getSettings($scheme)['description'];
+    $description = $this->getFactory()->getSettings($scheme)['description'];
     $default = $this->t('Flysystem: @scheme', ['@scheme' => $scheme]);
 
-    return $description !== '' ? $this->t($description) : $default;
+    return $description !== '' ? $description : $default;
   }
 
   /**
@@ -82,7 +82,7 @@ class FlysystemBridge extends FlysystemStreamWrapper implements StreamWrapperInt
       $uri = $this->uri;
     }
 
-    list($scheme, $target) = explode('://', $uri, 2);
+    [$scheme, $target] = explode('://', $uri, 2);
 
     return $scheme . '://' . ltrim(Util::dirname($target), '\/');
   }

@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Request;
 class LocalPathProcessorTest extends UnitTestCase {
 
   /**
+   * Inbound Path processor.
+   *
    * @var \Drupal\Core\PathProcessor\InboundPathProcessorInterface
    */
   protected $processor;
@@ -21,7 +23,7 @@ class LocalPathProcessorTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     new Settings(
       [
         'flysystem' => [

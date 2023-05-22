@@ -153,7 +153,9 @@ class ConfigForm extends FormBase {
 
       if (!is_resource($read_handle)) {
         $args = ['%scheme' => $scheme_from, '%file' => $filepath];
-        $context['results']['errors'][] = ['The file %scheme://%file could not be opened.', $args];
+        $context['results']['errors'][] = [
+          'The file %scheme://%file could not be opened.', $args,
+        ];
         return;
       }
 
@@ -161,14 +163,18 @@ class ConfigForm extends FormBase {
 
       if (!$success) {
         $args = ['%scheme' => $scheme_to, '%file' => $filepath];
-        $context['results']['errors'][] = ['The file %scheme://%file could not be saved.', $args];
+        $context['results']['errors'][] = [
+          'The file %scheme://%file could not be saved.', $args,
+        ];
       }
     }
 
     // Catch all exceptions so we don't break batching. The types of exceptions
     // that adapters can throw varies greatly.
     catch (\Exception $e) {
-      $context['results']['errors'][] = ['An eror occured while copying %file.', ['%file' => $filepath]];
+      $context['results']['errors'][] = [
+        'An eror occured while copying %file.', ['%file' => $filepath],
+      ];
       $context['results']['errors'][] = $e->getMessage();
 
       watchdog_exception('flysystem', $e);

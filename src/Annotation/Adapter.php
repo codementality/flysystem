@@ -7,7 +7,7 @@ use Drupal\Component\Annotation\Plugin;
 /**
  * Defines a Flysystem adapter plguin.
  *
- * Plugin Namespace: Flysystem
+ * Plugin Namespace: Flysystem.
  *
  * For a working example, see \Drupal\flysystem\Flysystem\Local.
  *

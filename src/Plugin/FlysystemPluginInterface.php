@@ -2,6 +2,9 @@
 
 namespace Drupal\flysystem\Plugin;
 
+/**
+ * Interface definition for Flysystem plugins.
+ */
 interface FlysystemPluginInterface {
 
   /**

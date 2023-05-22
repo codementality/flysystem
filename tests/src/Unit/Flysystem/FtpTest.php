@@ -17,7 +17,7 @@ namespace Drupal\Tests\flysystem\Unit\Flysystem {
     /**
      * {@inheritdoc}
      */
-    public function setUp() {
+    public function setUp(): void {
       parent::setUp();
       if (!defined('FTP_BINARY')) {
         $this->markTestSkipped('The FTP_BINARY constant is not defined.');

@@ -57,12 +57,15 @@ class DrupalCacheAdapterTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setup() {
+  public function setup(): void {
     $this->cacheItemBackend = new CacheItemBackend(static::SCHEME, new MemoryBackend('foo'));
     $this->adapter = $this->prophesize(AdapterInterface::class);
     $this->cacheAdapter = new DrupalCacheAdapter(static::SCHEME, $this->adapter->reveal(), $this->cacheItemBackend);
   }
 
+  /**
+   * Tests creating a public file.
+   */
   public function testWriteSuccess() {
     $config = new Config();
     $this->adapter
@@ -75,6 +78,9 @@ class DrupalCacheAdapterTest extends UnitTestCase {
     $this->assertTrue($this->cacheItemBackend->has(static::FILE));
   }
 
+  /**
+   * Tests creating a public file stream.
+   */
   public function testWriteStreamSuccess() {
     $config = new Config();
     $stream = fopen('data:text/plain,contents', 'rb');
@@ -89,6 +95,9 @@ class DrupalCacheAdapterTest extends UnitTestCase {
     $this->assertTrue($this->cacheItemBackend->has(static::FILE));
   }
 
+  /**
+   * Tests public file updates.
+   */
   public function testUpdateSuccess() {
     $config = new Config();
     $this->adapter
@@ -100,6 +109,9 @@ class DrupalCacheAdapterTest extends UnitTestCase {
     $this->assertSame('public', $this->cacheAdapter->getVisibility(static::FILE)['visibility']);
   }
 
+  /**
+   * Tests public file stream updates.
+   */
   public function testUpdateStreamSuccess() {
     $config = new Config();
     $stream = fopen('data:text/plain,contents', 'rb');
@@ -114,6 +126,9 @@ class DrupalCacheAdapterTest extends UnitTestCase {
     $this->assertTrue($this->cacheItemBackend->has(static::FILE));
   }
 
+  /**
+   * Tests renaming a file.
+   */
   public function testRenameSuccess() {
     $config = new Config();
     $this->adapter
@@ -134,6 +149,9 @@ class DrupalCacheAdapterTest extends UnitTestCase {
 
   }
 
+  /**
+   * Tests copying a file.
+   */
   public function testCopySuccess() {
     $config = new Config();
     $this->adapter
@@ -152,6 +170,9 @@ class DrupalCacheAdapterTest extends UnitTestCase {
     $this->assertTrue($this->cacheItemBackend->has('new.txt'));
   }
 
+  /**
+   * Tests deleting a file.
+   */
   public function testDeleteSuccess() {
     $config = new Config();
     $this->adapter
@@ -166,6 +187,9 @@ class DrupalCacheAdapterTest extends UnitTestCase {
     $this->assertFalse($this->cacheItemBackend->has(static::FILE));
   }
 
+  /**
+   * Tests deleting a file directory.
+   */
   public function testDeleteDirSuccess() {
     $config = new Config();
     // Create a directory with one sub file.
@@ -187,8 +211,10 @@ class DrupalCacheAdapterTest extends UnitTestCase {
     $this->assertFalse($this->cacheItemBackend->has('testdir'));
   }
 
+  /**
+   * Tests visibility checking on private files.
+   */
   public function testSetVisibilitySuccess() {
-    $config = new Config();
     $this->adapter
       ->setVisibility(static::FILE, 'private')
       ->willReturn(['visibility' => 'private']);
@@ -199,32 +225,50 @@ class DrupalCacheAdapterTest extends UnitTestCase {
     $this->assertTrue($this->cacheItemBackend->has(static::FILE));
   }
 
+  /**
+   * Tests file loading success.
+   */
   public function testHasSuccess() {
     $cache_item = $this->cacheItemBackend->load(static::FILE);
     $this->cacheItemBackend->set(static::FILE, $cache_item);
     $this->assertTrue($this->cacheAdapter->has(static::FILE));
   }
 
+  /**
+   * Tests file loading failure.
+   */
   public function testHasFail() {
     $this->adapter->has(static::FILE)->willReturn(TRUE);
     $this->assertTrue($this->cacheAdapter->has(static::FILE));
   }
 
+  /**
+   * Tests reading a file.
+   */
   public function testRead() {
     $this->adapter->read(static::FILE)->willReturn(TRUE);
     $this->assertTrue($this->cacheAdapter->read(static::FILE));
   }
 
+  /**
+   * Tests reading a stream.
+   */
   public function testReadStream() {
     $this->adapter->readStream(static::FILE)->willReturn(TRUE);
     $this->assertTrue($this->cacheAdapter->readStream(static::FILE));
   }
 
+  /**
+   * Tests listing contents of a directory.
+   */
   public function testListContentsSuccess() {
     $this->adapter->listContents('testdir', TRUE)->willReturn(TRUE);
     $this->assertTrue($this->cacheAdapter->listContents('testdir', TRUE));
   }
 
+  /**
+   * Tests retrieving file metadata.
+   */
   public function testGetMetadataSuccess() {
     $cache_item = $this->cacheItemBackend->load(static::FILE);
     $cache_item->updateMetadata(['type' => 'dir']);
@@ -233,12 +277,18 @@ class DrupalCacheAdapterTest extends UnitTestCase {
     $this->assertSame('dir', $this->cacheAdapter->getMetadata(static::FILE)['type']);
   }
 
+  /**
+   * Tests failing to retrieve file metadata.
+   */
   public function testGetMetadataFail() {
     $this->adapter->getMetadata(static::FILE)->willReturn(['type' => 'dir']);
 
     $this->assertSame('dir', $this->cacheAdapter->getMetadata(static::FILE)['type']);
   }
 
+  /**
+   * Tests failing to retrieve file size.
+   */
   public function testGetSizeFail() {
     $this->adapter->getSize(static::FILE)->willReturn(['size' => 123]);
 

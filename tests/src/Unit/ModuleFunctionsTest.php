@@ -27,7 +27,7 @@ class ModuleFunctionsTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
     vfsStream::setup('module_file');
 
@@ -38,7 +38,7 @@ class ModuleFunctionsTest extends UnitTestCase {
 
     $file_system_helper = $this->prophesize(StreamWrapperManagerInterface::class);
     $file_system_helper->isValidScheme(Argument::type('string'))->will(function ($uri) {
-      list($scheme) = explode('://', $uri[0]);
+      [$scheme] = explode('://', $uri[0]);
       return $scheme;
     });
 

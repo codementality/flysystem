@@ -18,16 +18,22 @@ use Drupal\flysystem\Routing\FlysystemRoutes;
 class FlysystemRoutesTest extends UnitTestCase {
 
   /**
+   * Flysystem Factory.
+   *
    * @var \Drupal\flysystem\FlysystemFactory
    */
   protected $factory;
 
   /**
+   * Drupal ModuleHandler.
+   *
    * @var \Drupal\Core\Extension\ModuleHandlerInterface
    */
   protected $moduleHandler;
 
   /**
+   * Flysystem routing for files.
+   *
    * @var \Drupal\flysystem\Routing\FlysystemRoutes
    */
   protected $router;
@@ -35,7 +41,7 @@ class FlysystemRoutesTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     $container = new ContainerBuilder();
 
     $stream_wrapper = $this->prophesize(LocalStream::class);
@@ -95,17 +101,17 @@ class FlysystemRoutesTest extends UnitTestCase {
    */
   public function testLocalPathSameAsPublicIsSkipped() {
     new Settings([
-    'flysystem' => [
-      'test' => [
-        'driver' => 'local',
-        'public' => TRUE,
-        'config' => [
+      'flysystem' => [
+        'test' => [
+          'driver' => 'local',
           'public' => TRUE,
-          'root' => 'sites/default/files',
+          'config' => [
+            'public' => TRUE,
+            'root' => 'sites/default/files',
+          ],
         ],
       ],
-    ],
-]);
+    ]);
 
     $this->assertSame([], $this->router->routes());
   }
@@ -115,17 +121,17 @@ class FlysystemRoutesTest extends UnitTestCase {
    */
   public function testValidRoutesReturned() {
     new Settings([
-    'flysystem' => [
-      'test' => [
-        'driver' => 'local',
-        'public' => TRUE,
-        'config' => [
+      'flysystem' => [
+        'test' => [
+          'driver' => 'local',
           'public' => TRUE,
-          'root' => 'sites/default/files/flysystem',
+          'config' => [
+            'public' => TRUE,
+            'root' => 'sites/default/files/flysystem',
+          ],
         ],
       ],
-    ],
-]);
+    ]);
 
     $routes = $this->router->routes();
     $this->assertSame(1, count($routes));
@@ -137,17 +143,17 @@ class FlysystemRoutesTest extends UnitTestCase {
    */
   public function testValidRoutesReturnedWithImageModule() {
     new Settings([
-    'flysystem' => [
-      'test' => [
-        'driver' => 'local',
-        'public' => TRUE,
-        'config' => [
+      'flysystem' => [
+        'test' => [
+          'driver' => 'local',
           'public' => TRUE,
-          'root' => 'sites/default/files/flysystem',
+          'config' => [
+            'public' => TRUE,
+            'root' => 'sites/default/files/flysystem',
+          ],
         ],
       ],
-    ],
-]);
+    ]);
 
     $this->moduleHandler->moduleExists('image')->willReturn(TRUE);
     $routes = $this->router->routes();
