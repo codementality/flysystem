@@ -6,7 +6,7 @@ use Drupal\Core\Logger\RfcLogLevel;
 use Drupal\flysystem\Event\EnsureEvent;
 use Drupal\flysystem\Event\FlysystemEvents;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contract\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**

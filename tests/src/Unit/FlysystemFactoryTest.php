@@ -16,7 +16,7 @@ use League\Flysystem\Adapter\NullAdapter;
 use League\Flysystem\FilesystemInterface;
 use League\Flysystem\Replicate\ReplicateAdapter;
 use Prophecy\Argument;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @coversDefaultClass \Drupal\flysystem\FlysystemFactory
@@ -34,7 +34,7 @@ class FlysystemFactoryTest extends UnitTestCase {
   /**
    * Event Dispatcher.
    *
-   * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
+   * @var \Symfony\Contracts\EventDispatcher\EventDispatcherInterface
    */
   protected $eventDispatcher;
 

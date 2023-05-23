@@ -12,7 +12,7 @@ use Drupal\flysystem\Flysystem\Adapter\CacheItemBackend;
 use Drupal\flysystem\Flysystem\Adapter\DrupalCacheAdapter;
 use League\Flysystem\Filesystem;
 use League\Flysystem\Replicate\ReplicateAdapter;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
  * A factory for Flysystem filesystems.
@@ -45,7 +45,7 @@ class FlysystemFactory {
   /**
    * The event dispatcher.
    *
-   * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
+   * @var \Symfony\Contract\EventDispatcher\EventDispatcherInterface
    */
   protected $eventDispatcher;
 
@@ -86,7 +86,7 @@ class FlysystemFactory {
    *   The stream wrapper manager service.
    * @param \Drupal\Core\Cache\CacheBackendInterface $cache
    *   The cache backend.
-   * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $event_dispatcher
+   * @param \Symfony\Contract\EventDispatcher\EventDispatcherInterface $event_dispatcher
    *   The event dispatcher.
    */
   public function __construct(PluginManagerInterface $plugin_manager, StreamWrapperManagerInterface $stream_wrapper_manager, CacheBackendInterface $cache, EventDispatcherInterface $event_dispatcher) {
@@ -188,7 +188,7 @@ class FlysystemFactory {
           $error['context']
         );
 
-        $this->eventDispatcher->dispatch(FlysystemEvents::ENSURE, $event);
+        $this->eventDispatcher->dispatch($event, FlysystemEvents::ENSURE);
 
         $errors[$scheme][] = $error;
       }
