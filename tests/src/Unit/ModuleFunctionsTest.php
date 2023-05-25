@@ -7,7 +7,7 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\flysystem\FlysystemFactory;
 use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface;
+use Drupal\Core\File\MimeType\ExtensionMimeTypeGuesser;
 use org\bovigo\vfs\vfsStream;
 
 /**
@@ -42,8 +42,8 @@ class ModuleFunctionsTest extends UnitTestCase {
       return $scheme;
     });
 
-    $guesser = $this->prophesize(MimeTypeGuesserInterface::class);
-    $guesser->guess(Argument::type('string'))->willReturn('txt/flysystem');
+    $guesser = $this->prophesize(ExtensionMimeTypeGuesser::class);
+    $guesser->guessMimeType(Argument::type('string'))->willReturn('txt/flysystem');
 
     $container = new ContainerBuilder();
     $container->set('file_system', $file_system_helper->reveal());
@@ -73,13 +73,13 @@ class ModuleFunctionsTest extends UnitTestCase {
    * Tests flysystem_file_download() handles valid schemes.
    */
   public function testFlysystemFileDownloadFindsValidScheme() {
-    file_put_contents('vfs://module_file/file.txt', '1234');
-
+    $success = file_put_contents('vfs://module_file/file.txt', '1234');
+    $this->assertEquals($success, 4);
     $return = flysystem_file_download('vfs://module_file/file.txt');
 
-    $this->assertSame(2, count($return));
+    $this->assertEquals(2, count($return));
     $this->assertSame('txt/flysystem', $return['Content-Type']);
-    $this->assertSame(4, $return['Content-Length']);
+    $this->assertEquals(4, $return['Content-Length']);
   }
 
   /**

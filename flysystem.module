@@ -33,7 +33,7 @@ function flysystem_file_download($uri) {
   }
 
   return [
-    'Content-Type' => Drupal::service('file.mime_type.guesser.extension')->guess($uri),
+    'Content-Type' => Drupal::service('file.mime_type.guesser.extension')->guessMimeType($uri),
     'Content-Length' => filesize($uri),
   ];
 }
