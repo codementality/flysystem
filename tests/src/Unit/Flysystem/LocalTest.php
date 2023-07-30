@@ -118,7 +118,7 @@ class LocalTest extends UnitTestCase {
 
     $result = (new Local('foo/bar'))->ensure();
 
-    $this->assertSame(1, count($result));
+    $this->assertCount(1, $result);
     $this->assertSame(RfcLogLevel::INFO, $result[0]['severity']);
     $this->assertSame('htcontent', file_get_contents('foo/bar/.htaccess'));
   }
@@ -131,7 +131,7 @@ class LocalTest extends UnitTestCase {
     mkdir('foo/bar/.htaccess', 0777, TRUE);
 
     $result = (new Local('foo/bar'))->ensure(TRUE);
-    $this->assertSame(1, count($result));
+    $this->assertCount(1, $result);
     $this->assertSame('https://www.drupal.org/SA-CORE-2013-003', $result[0]['context']['@url']);
   }
 

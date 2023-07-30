@@ -19,7 +19,7 @@ class CssCollectionOptimizer extends DrupalCssCollectionOptimizer {
   public function deleteAll() {
     $this->state->delete('drupal_css_cache_files');
     /** @var \Drupal\Core\File\FileSystem $file_system */
-    $file_system = \Drupal::service('file_system');
+    $file_system = $this->fileSystem;
     $delete_stale = static function ($uri) use ($file_system) {
       // Default stale file threshold is 30 days (2592000 seconds).
       $stale_file_threshold = \Drupal::config('system.performance')->get('stale_file_threshold') ?? 2592000;

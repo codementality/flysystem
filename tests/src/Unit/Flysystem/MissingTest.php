@@ -19,7 +19,7 @@ class MissingTest extends UnitTestCase {
     $plugin = new Missing([]);
     $this->assertInstanceOf(MissingAdapter::class, $plugin->getAdapter());
     $this->assertTrue(is_array($plugin->ensure()));
-    $this->assertSame(1, count($plugin->ensure()));
+    $this->assertCount(1, $plugin->ensure());
     $this->assertSame('', $plugin->getExternalUrl('asdf'));
   }
 

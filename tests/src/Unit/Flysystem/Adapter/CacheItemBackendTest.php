@@ -34,7 +34,8 @@ class CacheItemBackendTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setup(): void {
+  public function setUp(): void {
+    parent::setUp();
     $this->cacheBackend = new MemoryBackend('foo');
     $this->cacheItemBackend = new CacheItemBackend('test-scheme', $this->cacheBackend);
   }

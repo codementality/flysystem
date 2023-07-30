@@ -48,7 +48,7 @@ namespace Drupal\Tests\flysystem\Unit\Flysystem {
     public function testEnsureReturnsNoErrorsOnSuccess() {
       $result = (new Ftp(['host' => 'success']))->ensure();
 
-      $this->assertSame(1, count($result));
+      $this->assertCount(1, $result);
       $this->assertSame(RfcLogLevel::INFO, $result[0]['severity']);
     }
 
@@ -58,7 +58,7 @@ namespace Drupal\Tests\flysystem\Unit\Flysystem {
     public function testEnsureReturnsErrors() {
       $plugin = new Ftp([]);
       $result = $plugin->ensure();
-      $this->assertSame(1, count($result));
+      $this->assertCount(1, $result);
       $this->assertSame(21, $result[0]['context']['%port']);
     }
 

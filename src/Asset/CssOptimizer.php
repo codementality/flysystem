@@ -10,23 +10,6 @@ use Drupal\Core\Asset\CssOptimizer as DrupalCssOptimizer;
  * @codeCoverageIgnore
  */
 class CssOptimizer extends DrupalCssOptimizer {
-  /**
-   * The FileUrl Generator Service.
-   *
-   * @var \Drupal\Core\File\FileUrlGeneratorInterface
-   */
-  protected $fileUrlGenerator;
-
-  /**
-   * Constructs a new CssOptimizer object.
-   *
-   * @param \Drupal\Core\File\FileUrlGeneratorInterface $fileUrlGenerator
-   *   The FileUrl Generator service.
-   */
-  public function __construct(FileUrlGeneratorInterface $fileUrlGenerator) {
-    parent::__construct($fileUrlGenerator);
-    $this->fileUrlGenerator = $fileUrlGenerator;
-  }
 
   /**
    * {@inheritdoc}

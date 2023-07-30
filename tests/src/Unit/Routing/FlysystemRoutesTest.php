@@ -42,6 +42,7 @@ class FlysystemRoutesTest extends UnitTestCase {
    * {@inheritdoc}
    */
   public function setUp(): void {
+    parent::setUp();
     $container = new ContainerBuilder();
 
     $stream_wrapper = $this->prophesize(LocalStream::class);
@@ -134,7 +135,7 @@ class FlysystemRoutesTest extends UnitTestCase {
     ]);
 
     $routes = $this->router->routes();
-    $this->assertSame(1, count($routes));
+    $this->assertCount(1, $routes);
     $this->assertTrue(isset($routes['flysystem.test.serve']));
   }
 
@@ -157,7 +158,7 @@ class FlysystemRoutesTest extends UnitTestCase {
 
     $this->moduleHandler->moduleExists('image')->willReturn(TRUE);
     $routes = $this->router->routes();
-    $this->assertSame(3, count($routes));
+    $this->assertCount(3, $routes);
     $this->assertTrue(isset($routes['flysystem.image_style']));
   }
 

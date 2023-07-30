@@ -36,7 +36,7 @@ class FlysystemPluginManagerTest extends UnitTestCase {
     ];
 
     $method->invokeArgs($manager, [&$definitions]);
-    $this->assertSame(2, count($definitions));
+    $this->assertCount(2, $definitions);
     $this->assertArrayHasKey('test1', $definitions);
     $this->assertArrayHasKey('test2', $definitions);
     $this->assertArrayNotHasKey('test3', $definitions);

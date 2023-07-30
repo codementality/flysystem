@@ -51,7 +51,7 @@ class InstallFunctionsTest extends UnitTestCase {
     $dependencies_exist = (int) class_exists(FlysystemStreamWrapper::class);
 
     $return = flysystem_requirements('update');
-    $this->assertSame(1 - $dependencies_exist, count($return));
+    $this->assertCount((1 - $dependencies_exist), $return);
   }
 
   /**
@@ -61,7 +61,7 @@ class InstallFunctionsTest extends UnitTestCase {
     $dependencies_exist = (int) class_exists(FlysystemStreamWrapper::class);
 
     $return = flysystem_requirements('install');
-    $this->assertSame(1 - $dependencies_exist, count($return));
+    $this->assertCount((1 - $dependencies_exist), $return);
   }
 
   /**
@@ -82,7 +82,7 @@ class InstallFunctionsTest extends UnitTestCase {
 
     $return = flysystem_requirements('runtime');
 
-    $this->assertSame(2 - $dependencies_exist, count($return));
+    $this->assertCount((2 - $dependencies_exist), $return);
     $this->assertSame('Test message', (string) $return['flysystem:testscheme']['description']);
   }
 

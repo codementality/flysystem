@@ -86,7 +86,7 @@ namespace Drupal\Tests\flysystem\Unit\Form {
      */
     public function testBuildForm() {
       $form = $this->form->buildForm([], new FormState());
-      $this->assertSame(4, count($form));
+      $this->assertCount(4, $form);
 
       $this->assertTrue($form['sync_from']['#required']);
       $this->assertTrue($form['sync_to']['#required']);
@@ -105,12 +105,11 @@ namespace Drupal\Tests\flysystem\Unit\Form {
       $form_state->setValue('sync_to', 'to');
 
       $this->form->validateForm($form, $form_state);
-      $this->assertSame(0, count($form_state->getErrors()));
-
+      $this->assertCount(0, $form_state->getErrors());
       $form_state->setValue('sync_to', 'from');
 
       $this->form->validateForm($form, $form_state);
-      $this->assertSame(2, count($form_state->getErrors()));
+      $this->assertCount(2, $form_state->getErrors());
     }
 
     /**
@@ -127,7 +126,7 @@ namespace Drupal\Tests\flysystem\Unit\Form {
       $batch = batch_set();
 
       $this->assertSame(ConfigForm::class . '::finishBatch', $batch['finished']);
-      $this->assertSame(0, count($batch['operations']));
+      $this->assertCount(0, $batch['operations']);
 
       // Test with existing source files.
       $from = new Filesystem(new MemoryAdapter());
@@ -188,8 +187,8 @@ namespace Drupal\Tests\flysystem\Unit\Form {
       ConfigForm::copyFile('failed_read', 'to_empty', 'does_not_exist', $context);
 
       $to_files = $this->factory->reveal()->getFilesystem('to_empty')->listContents('', TRUE);
-      $this->assertSame(0, count($to_files));
-      $this->assertSame(1, count($context['results']['errors']));
+      $this->assertCount(0, $to_files);
+      $this->assertCount(1, $context['results']['errors']);
     }
 
     /**
@@ -208,7 +207,7 @@ namespace Drupal\Tests\flysystem\Unit\Form {
 
       ConfigForm::copyFile('from_files', 'to_fail', 'test.txt', $context);
 
-      $this->assertSame(1, count($context['results']['errors']));
+      $this->assertCount(1, $context['results']['errors']);
       $this->assertTrue(strpos($context['results']['errors'][0][0], 'could not be saved') !== FALSE);
     }
 
@@ -218,7 +217,7 @@ namespace Drupal\Tests\flysystem\Unit\Form {
     public function testCopyFileException() {
       $context = [];
       ConfigForm::copyFile('from_empty', 'to_empty', 'does_not_exist.txt', $context);
-      $this->assertSame(2, count($context['results']['errors']));
+      $this->assertCount(2, $context['results']['errors']);
       $this->assertTrue(strpos($context['results']['errors'][0][0], 'An eror occured while copying') !== FALSE);
       $this->assertTrue(strpos($context['results']['errors'][1], 'File not found at path') !== FALSE);
     }

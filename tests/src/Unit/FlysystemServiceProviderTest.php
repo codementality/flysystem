@@ -34,6 +34,7 @@ class FlysystemServiceProviderTest extends UnitTestCase {
    * {@inheritdoc}
    */
   public function setUp(): void {
+    parent::setUp();
     $this->container = new ContainerBuilder();
   }
 

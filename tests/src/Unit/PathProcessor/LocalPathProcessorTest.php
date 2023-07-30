@@ -24,6 +24,7 @@ class LocalPathProcessorTest extends UnitTestCase {
    * {@inheritdoc}
    */
   public function setUp(): void {
+    parent::setUp();
     new Settings(
       [
         'flysystem' => [

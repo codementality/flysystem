@@ -57,7 +57,8 @@ class DrupalCacheAdapterTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setup(): void {
+  public function setUp(): void {
+    parent::setUp();
     $this->cacheItemBackend = new CacheItemBackend(static::SCHEME, new MemoryBackend('foo'));
     $this->adapter = $this->prophesize(AdapterInterface::class);
     $this->cacheAdapter = new DrupalCacheAdapter(static::SCHEME, $this->adapter->reveal(), $this->cacheItemBackend);

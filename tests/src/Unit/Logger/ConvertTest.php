@@ -16,6 +16,7 @@ class ConvertTest extends UnitTestCase {
    * {@inheritdoc}
    */
   public function setUp(): void {
+    parent::setUp();
     $consts = [
       'REQUIREMENT_INFO' => -1,
       'REQUIREMENT_OK' => 0,

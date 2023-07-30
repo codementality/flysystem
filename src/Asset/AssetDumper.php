@@ -26,8 +26,8 @@ class AssetDumper extends DrupalAssetDumper {
     $path = $this->getSchemeForExtension($file_extension) . '://' . $file_extension;
     $uri = $path . '/' . $filename;
     // Create the CSS or JS file.
-    \Drupal::service('file_system')->prepareDirectory($path, FileSystemInterface::CREATE_DIRECTORY);
-    if (!file_exists($uri) && !\Drupal::service('file_system')->saveData($data, $uri, FileSystemInterface::EXISTS_REPLACE)) {
+    $this->fileSystem->prepareDirectory($path, FileSystemInterface::CREATE_DIRECTORY);
+    if (!file_exists($uri) && !$this->fileSystem->saveData($data, $uri, FileSystemInterface::EXISTS_REPLACE)) {
       return FALSE;
     }
     // If CSS/JS gzip compression is enabled and the zlib extension is available
@@ -39,7 +39,7 @@ class AssetDumper extends DrupalAssetDumper {
     // aren't working can set css.gzip to FALSE in order to skip
     // generating a file that won't be used.
     if (extension_loaded('zlib') && \Drupal::config('system.performance')->get($file_extension . '.gzip')) {
-      if (!file_exists($uri . '.gz') && !\Drupal::service('file_system')->saveData(gzencode($data, 9, FORCE_GZIP), $uri . '.gz', FileSystemInterface::EXISTS_REPLACE)) {
+      if (!file_exists($uri . '.gz') && !$this->fileSystem->saveData(gzencode($data, 9, FORCE_GZIP), $uri . '.gz', FileSystemInterface::EXISTS_REPLACE)) {
         return FALSE;
       }
     }
