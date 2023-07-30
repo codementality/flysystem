@@ -3,9 +3,9 @@
 namespace Drupal\Tests\flysystem\Unit\Flysystem {
 
   use Drupal\Core\Logger\RfcLogLevel;
-  use Drupal\Tests\UnitTestCase;
   use Drupal\flysystem\Flysystem\Adapter\MissingAdapter;
   use Drupal\flysystem\Flysystem\Ftp;
+  use Drupal\Tests\UnitTestCase;
   use League\Flysystem\Adapter\Ftp as LeagueFtp;
 
   /**

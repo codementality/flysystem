@@ -2,19 +2,19 @@
 
 namespace Drupal\Tests\flysystem\Unit\Form {
 
-  use function Drupal\flysystem\Form\batch_set;
   use Drupal\Core\Form\FormState;
   use Drupal\Core\Logger\LoggerChannelFactoryInterface;
   use Drupal\Core\Messenger\MessengerInterface;
-  use Drupal\Tests\UnitTestCase;
   use Drupal\flysystem\FlysystemFactory;
   use Drupal\flysystem\Form\ConfigForm;
+  use Drupal\Tests\UnitTestCase;
   use League\Flysystem\Filesystem;
   use League\Flysystem\FilesystemInterface;
   use League\Flysystem\Memory\MemoryAdapter;
   use Prophecy\Argument;
   use Psr\Log\LoggerInterface;
   use Symfony\Component\DependencyInjection\ContainerBuilder;
+  use function Drupal\flysystem\Form\batch_set;
 
   /**
    * @coversDefaultClass \Drupal\flysystem\Form\ConfigForm

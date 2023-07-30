@@ -3,8 +3,8 @@
 namespace Drupal\Tests\flysystem\Unit\PathProcessor;
 
 use Drupal\Core\Site\Settings;
-use Drupal\Tests\UnitTestCase;
 use Drupal\flysystem\PathProcessor\LocalPathProcessor;
+use Drupal\Tests\UnitTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

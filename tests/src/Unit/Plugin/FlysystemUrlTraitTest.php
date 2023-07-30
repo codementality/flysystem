@@ -4,8 +4,8 @@ namespace Drupal\Tests\flysystem\Unit\Plugin;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Routing\UrlGenerator;
-use Drupal\Tests\UnitTestCase;
 use Drupal\flysystem\Plugin\FlysystemUrlTrait;
+use Drupal\Tests\UnitTestCase;
 
 /**
  * @coversDefaultClass \Drupal\flysystem\Plugin\FlysystemUrlTrait

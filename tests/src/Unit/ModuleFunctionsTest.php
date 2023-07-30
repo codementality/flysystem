@@ -2,13 +2,13 @@
 
 namespace Drupal\Tests\flysystem\Unit;
 
+use Drupal\Core\File\MimeType\ExtensionMimeTypeGuesser;
 use Drupal\Core\StreamWrapper\StreamWrapperManagerInterface;
-use Drupal\Tests\UnitTestCase;
 use Drupal\flysystem\FlysystemFactory;
+use Drupal\Tests\UnitTestCase;
+use org\bovigo\vfs\vfsStream;
 use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Drupal\Core\File\MimeType\ExtensionMimeTypeGuesser;
-use org\bovigo\vfs\vfsStream;
 
 /**
  * Tests module functions.

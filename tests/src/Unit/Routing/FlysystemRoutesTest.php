@@ -7,9 +7,9 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Site\Settings;
 use Drupal\Core\StreamWrapper\LocalStream;
 use Drupal\Core\StreamWrapper\StreamWrapperManagerInterface;
-use Drupal\Tests\UnitTestCase;
 use Drupal\flysystem\FlysystemFactory;
 use Drupal\flysystem\Routing\FlysystemRoutes;
+use Drupal\Tests\UnitTestCase;
 
 /**
  * @coversDefaultClass \Drupal\flysystem\Routing\FlysystemRoutes

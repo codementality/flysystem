@@ -3,9 +3,9 @@
 namespace Drupal\Tests\flysystem\Unit\Flysystem\Adapter;
 
 use Drupal\Core\Cache\MemoryBackend;
-use Drupal\Tests\UnitTestCase;
 use Drupal\flysystem\Flysystem\Adapter\CacheItem;
 use Drupal\flysystem\Flysystem\Adapter\CacheItemBackend;
+use Drupal\Tests\UnitTestCase;
 
 /**
  * Tests \Drupal\flysystem\Flysystem\Adapter\CacheItemBackend.

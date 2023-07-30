@@ -4,8 +4,8 @@ namespace Drupal\Tests\flysystem\Unit\Plugin;
 
 use Drupal\Core\Cache\MemoryBackend;
 use Drupal\Core\Extension\ModuleHandlerInterface;
-use Drupal\Tests\UnitTestCase;
 use Drupal\flysystem\Plugin\FlysystemPluginManager;
+use Drupal\Tests\UnitTestCase;
 
 /**
  * @coversDefaultClass \Drupal\flysystem\Plugin\FlysystemPluginManager

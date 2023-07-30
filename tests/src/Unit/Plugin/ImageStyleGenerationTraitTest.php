@@ -8,11 +8,11 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\EntityTypeRepositoryInterface;
 use Drupal\Core\Lock\LockBackendInterface;
 use Drupal\Core\Lock\NullLockBackend;
-use Drupal\Tests\UnitTestCase;
 use Drupal\flysystem\Plugin\ImageStyleGenerationTrait;
 use Drupal\image\Entity\ImageStyle;
-use Prophecy\Argument;
+use Drupal\Tests\UnitTestCase;
 use org\bovigo\vfs\vfsStream;
+use Prophecy\Argument;
 
 /**
  * @coversDefaultClass \Drupal\flysystem\Plugin\ImageStyleGenerationTrait

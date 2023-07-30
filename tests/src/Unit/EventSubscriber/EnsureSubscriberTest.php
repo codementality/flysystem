@@ -2,10 +2,10 @@
 
 namespace Drupal\Tests\flysystem\Unit\EventSubscriber;
 
-use Drupal\Tests\UnitTestCase;
-use Drupal\flysystem\EventSubscriber\EnsureSubscriber;
 use Drupal\flysystem\Event\EnsureEvent;
 use Drupal\flysystem\Event\FlysystemEvents;
+use Drupal\flysystem\EventSubscriber\EnsureSubscriber;
+use Drupal\Tests\UnitTestCase;
 use Psr\Log\LoggerInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 

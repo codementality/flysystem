@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\flysystem\Unit\PathProcessor;
 
-use Drupal\Tests\UnitTestCase;
 use Drupal\flysystem\PathProcessor\FlysystemPathProcessor;
+use Drupal\Tests\UnitTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

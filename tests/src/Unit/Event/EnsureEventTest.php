@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\flysystem\Unit\Event;
 
-use Drupal\Tests\UnitTestCase;
 use Drupal\flysystem\Event\EnsureEvent;
+use Drupal\Tests\UnitTestCase;
 
 /**
  * Tests EnsureEvent.

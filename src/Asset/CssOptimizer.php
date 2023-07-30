@@ -31,7 +31,6 @@ class CssOptimizer extends DrupalCssOptimizer {
   /**
    * {@inheritdoc}
    */
-
   public function rewriteFileURI($matches): string {
     // Prefix with base and remove '../' segments where possible.
     $path = $this->rewriteFileURIBasePath . $matches[1];

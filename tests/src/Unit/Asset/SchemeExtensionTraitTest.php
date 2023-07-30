@@ -3,8 +3,8 @@
 namespace Drupal\Tests\flysystem\Unit\Asset;
 
 use Drupal\Core\Site\Settings;
-use Drupal\Tests\UnitTestCase;
 use Drupal\flysystem\Asset\SchemeExtensionTrait;
+use Drupal\Tests\UnitTestCase;
 
 /**
  * @coversDefaultClass \Drupal\flysystem\Asset\SchemeExtensionTrait

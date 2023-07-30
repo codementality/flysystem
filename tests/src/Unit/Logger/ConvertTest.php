@@ -3,8 +3,8 @@
 namespace Drupal\Tests\flysystem\Unit\Logger;
 
 use Drupal\Core\Logger\RfcLogLevel;
-use Drupal\Tests\UnitTestCase;
 use Drupal\flysystem\Logger\Convert;
+use Drupal\Tests\UnitTestCase;
 
 /**
  * @coversDefaultClass \Drupal\flysystem\Logger\Convert

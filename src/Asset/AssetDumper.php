@@ -2,9 +2,9 @@
 
 namespace Drupal\flysystem\Asset;
 
-use Drupal\Core\File\FileSystemInterface;
 use Drupal\Component\Utility\Crypt;
 use Drupal\Core\Asset\AssetDumper as DrupalAssetDumper;
+use Drupal\Core\File\FileSystemInterface;
 
 /**
  * Flysystem dependency injection container.

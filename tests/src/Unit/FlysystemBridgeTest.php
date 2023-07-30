@@ -3,11 +3,11 @@
 namespace Drupal\Tests\flysystem\Unit;
 
 use Drupal\Core\StreamWrapper\StreamWrapperInterface;
-use Drupal\Tests\UnitTestCase;
-use Drupal\flysystem\FlysystemBridge;
-use Drupal\flysystem\FlysystemFactory;
 use Drupal\flysystem\Flysystem\Adapter\MissingAdapter;
 use Drupal\flysystem\Flysystem\Missing;
+use Drupal\flysystem\FlysystemBridge;
+use Drupal\flysystem\FlysystemFactory;
+use Drupal\Tests\UnitTestCase;
 use League\Flysystem\Filesystem;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 

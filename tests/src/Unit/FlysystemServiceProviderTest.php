@@ -8,7 +8,6 @@ use Drupal\Core\Asset\CssOptimizer;
 use Drupal\Core\Asset\JsCollectionOptimizer;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Site\Settings;
-use Drupal\Tests\UnitTestCase;
 use Drupal\flysystem\Asset\AssetDumper as FlysystemAssetDumper;
 use Drupal\flysystem\Asset\CssCollectionOptimizer as FlysystemCssCollectionOptimizer;
 use Drupal\flysystem\Asset\CssOptimizer as FlysystemCssOptimizer;
@@ -16,6 +15,7 @@ use Drupal\flysystem\Asset\JsCollectionOptimizer as FlysystemJsCollectionOptimiz
 use Drupal\flysystem\FlysystemBridge;
 use Drupal\flysystem\FlysystemServiceProvider;
 use Drupal\flysystem\PathProcessor\LocalPathProcessor;
+use Drupal\Tests\UnitTestCase;
 
 /**
  * @coversDefaultClass \Drupal\flysystem\FlysystemServiceProvider

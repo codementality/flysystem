@@ -3,9 +3,9 @@
 namespace Drupal\Tests\flysystem\Unit\Flysystem\Adapter;
 
 use Drupal\Core\Cache\MemoryBackend;
-use Drupal\Tests\UnitTestCase;
 use Drupal\flysystem\Flysystem\Adapter\CacheItemBackend;
 use Drupal\flysystem\Flysystem\Adapter\DrupalCacheAdapter;
+use Drupal\Tests\UnitTestCase;
 use League\Flysystem\AdapterInterface;
 use League\Flysystem\Config;
 

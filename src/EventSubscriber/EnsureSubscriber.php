@@ -6,8 +6,8 @@ use Drupal\Core\Logger\RfcLogLevel;
 use Drupal\flysystem\Event\EnsureEvent;
 use Drupal\flysystem\Event\FlysystemEvents;
 use Psr\Log\LoggerInterface;
-use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Event listener that listens to Flysystem ensure() calls.

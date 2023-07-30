@@ -6,10 +6,10 @@ use Drupal\Core\Asset\AssetCollectionGrouperInterface;
 use Drupal\Core\Asset\CssOptimizer;
 use Drupal\Core\Asset\JsOptimizer;
 use Drupal\Core\State\StateInterface;
-use Drupal\KernelTests\KernelTestBase;
 use Drupal\flysystem\Asset\AssetDumper;
 use Drupal\flysystem\Asset\CssCollectionOptimizer;
 use Drupal\flysystem\Asset\JsCollectionOptimizer;
+use Drupal\KernelTests\KernelTestBase;
 use org\bovigo\vfs\vfsStream;
 
 /**

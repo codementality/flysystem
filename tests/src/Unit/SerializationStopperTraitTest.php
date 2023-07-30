@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\flysystem\Unit;
 
-use Drupal\Tests\UnitTestCase;
 use Drupal\flysystem\SerializationStopperTrait;
+use Drupal\Tests\UnitTestCase;
 
 /**
  * @coversDefaultClass \Drupal\flysystem\SerializationStopperTrait

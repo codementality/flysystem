@@ -2,9 +2,9 @@
 
 namespace Drupal\Tests\flysystem\Unit\Flysystem;
 
-use Drupal\Tests\UnitTestCase;
 use Drupal\flysystem\Flysystem\Adapter\MissingAdapter;
 use Drupal\flysystem\Flysystem\Missing;
+use Drupal\Tests\UnitTestCase;
 
 /**
  * @coversDefaultClass \Drupal\flysystem\Flysystem\Missing

@@ -4,8 +4,8 @@ namespace Drupal\Tests\flysystem\Unit;
 
 use Drupal\Core\Logger\RfcLogLevel;
 use Drupal\Core\Site\Settings;
-use Drupal\Tests\UnitTestCase;
 use Drupal\flysystem\FlysystemFactory;
+use Drupal\Tests\UnitTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Twistor\FlysystemStreamWrapper;
 
