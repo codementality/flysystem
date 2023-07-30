@@ -25,7 +25,7 @@ class CssOptimizer extends DrupalCssOptimizer {
     }
 
     // file_url_transform_relative() was removed here.
-    return 'url(' . file_create_url($path) . ')';
+    return 'url(' . \Drupal::service('file_url_generator')->generateAbsoluteString($path) . ')';
   }
 
 }
