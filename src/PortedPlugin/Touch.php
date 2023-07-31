@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\flysystem\Plugin;
+namespace Drupal\flysystem\PortedPlugin;
 
 use Drupal\flysystem\Ported\Flysystem\Util;
 use Drupal\flysystem\PortedPlugin\AbstractPlugin;
