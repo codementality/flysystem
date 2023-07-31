@@ -5,6 +5,7 @@ namespace Drupal\flysystem\PortedPlugin;
 use Drupal\flysystem\Ported\Flysystem\RootViolationException;
 use Drupal\flysystem\Ported\Flysystem\Util;
 use Drupal\flysystem\Exception\DirectoryNotEmptyException;
+use Drupal\flysystem\PortedPlugin\AbstractPlugin;
 
 /**
  * Ported from twistor/flysystem-stream-wrapper. 

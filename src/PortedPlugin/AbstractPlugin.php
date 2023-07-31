@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\flysytem\PortedPlugin;
+namespace Drupal\flysystem\PortedPlugin;
 
 use Drupal\flysystem\Ported\Flysystem\Config;
 use Drupal\flysystem\Ported\Flysystem\Plugin\AbstractPlugin as FlysystemPlugin;

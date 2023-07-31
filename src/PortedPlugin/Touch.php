@@ -3,6 +3,7 @@
 namespace Drupal\flysystem\Plugin;
 
 use Drupal\flysystem\Ported\Flysystem\Util;
+use Drupal\flysystem\PortedPlugin\AbstractPlugin;
 
 /**
  * Ported from twistor/flysystem-stream-wrapper. 

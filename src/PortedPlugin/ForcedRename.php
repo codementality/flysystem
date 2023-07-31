@@ -7,6 +7,7 @@ use Drupal\flysystem\Ported\Flysystem\Util;
 use Drupal\flysystem\Exception\DirectoryExistsException;
 use Drupal\flysystem\Exception\DirectoryNotEmptyException;
 use Drupal\flysystem\Exception\NotADirectoryException;
+use Drupal\flysystem\PortedPlugin\AbstractPlugin;
 
 /**
  * Ported Plugin from twistor/flysystem-stream-wrapper.

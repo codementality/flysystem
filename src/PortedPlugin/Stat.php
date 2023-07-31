@@ -6,6 +6,7 @@ use Drupal\flysystem\Ported\Flysystem\AdapterInterface;
 use Drupal\flysystem\FlysystemStreamWrapper;
 use Drupal\flysystem\Ported\PosixUid;
 use Drupal\flysystem\Ported\Uid;
+use Drupal\flysystem\PortedPlugin\AbstractPlugin;
 
 /**
  * Ported from twistor/flysystem-stream-wrapper. 

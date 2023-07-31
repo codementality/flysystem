@@ -4,6 +4,7 @@ namespace Drupal\flysystem\PortedPlugin;
 
 use Drupal\flysystem\Ported\Flysystem\FileNotFoundException;
 use Drupal\flysystem\Ported\Flysystem\Util;
+use Drupal\flysystem\PortedPlugin\AbstractPlugin;
 
 /**
  * Ported from twistor/flysystem-stream-wrapper.
