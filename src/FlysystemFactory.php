@@ -203,7 +203,7 @@ class FlysystemFactory {
    * @param string $scheme
    *   The scheme to find an adapter for.
    *
-   * @return \Drupal\flysystem\AdapterInterface
+   * @return \Drupal\flysystem\Ported\Flysystem\AdapterInterface
    *   The correct adapter from settings.
    */
   protected function getAdapter($scheme) {

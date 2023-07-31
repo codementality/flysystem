@@ -6,7 +6,7 @@ use Drupal\Core\Cache\MemoryBackend;
 use Drupal\flysystem\Flysystem\Adapter\CacheItemBackend;
 use Drupal\flysystem\Flysystem\Adapter\DrupalCacheAdapter;
 use Drupal\Tests\UnitTestCase;
-use Drupal\flysystem\AdapterInterface;
+use Drupal\flysystem\Ported\Flysystem\AdapterInterface;
 use Drupal\flysystem\Ported\Flysystem\Config;
 
 /**
@@ -36,7 +36,7 @@ class DrupalCacheAdapterTest extends UnitTestCase {
   /**
    * The wrapped Flysytem adaper.
    *
-   * @var \Drupal\flysystem\AdapterInterface|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Drupal\flysystem\Ported\Flysystem\AdapterInterface|\PHPUnit_Framework_MockObject_MockObject
    */
   protected $adapter;
 

@@ -2,7 +2,7 @@
 
 namespace Drupal\flysystem\Flysystem\Adapter;
 
-use Drupal\flysystem\AdapterInterface;
+use Drupal\flysystem\Ported\Flysystem\AdapterInterface;
 use Drupal\flysystem\Ported\Flysystem\Config;
 
 /**

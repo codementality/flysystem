@@ -2,7 +2,7 @@
 
 namespace Drupal\flysystem\PortedPlugin;
 
-use Drupal\flysystem\AdapterInterface;
+use Drupal\flysystem\Ported\Flysystem\AdapterInterface;
 use Drupal\flysystem\FlysystemStreamWrapper;
 use Drupal\flysystem\Ported\PosixUid;
 use Drupal\flysystem\Ported\Uid;

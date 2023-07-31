@@ -2,7 +2,7 @@
 
 namespace Drupal\flysystem\Ported\Replicate;
 
-use Drupal\flysystem\AdapterInterface;
+use Drupal\flysystem\Ported\Flysystem\AdapterInterface;
 use Drupal\flysystem\Ported\Flysystem\Config;
 use Drupal\flysystem\Ported\Flysystem\Util;
 

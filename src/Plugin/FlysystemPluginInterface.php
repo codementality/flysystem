@@ -2,6 +2,8 @@
 
 namespace Drupal\flysystem\Plugin;
 
+use Drupal\flysystem\Ported\Flysystem\AdapterInterface;
+
 /**
  * Interface definition for Flysystem plugins.
  */
@@ -14,7 +16,7 @@ interface FlysystemPluginInterface {
    * perform filesystem operations, it should either use a scheme:// or have the
    * \Drupal\flysystem\FlysystemFactory injected.
    *
-   * @return \Drupal\flysystem\AdapterInterface
+   * @return \Drupal\flysystem\Ported\Flysystem\AdapterInterface
    *   The Flysytem adapter.
    */
   public function getAdapter();

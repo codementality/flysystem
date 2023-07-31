@@ -15,8 +15,8 @@ class ReplicateAdapterTests extends \PHPUnit_Framework_TestCase
 
     public function setup()
     {
-        $this->source = Mockery::mock('Drupal\\flysystem\\AdapterInterface');
-        $this->replica = Mockery::mock('Drupal\\flysystem\\AdapterInterface');
+        $this->source = Mockery::mock('Drupal\\flysystem\\Ported\\Flysystem\\AdapterInterface');
+        $this->replica = Mockery::mock('Drupal\\flysystem\\Ported\\Flysystem\\AdapterInterface');
         $this->adapter = new ReplicateAdapter($this->source, $this->replica);
     }
 
