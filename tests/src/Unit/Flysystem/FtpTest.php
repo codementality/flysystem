@@ -6,7 +6,7 @@ namespace Drupal\Tests\flysystem\Unit\Flysystem {
   use Drupal\flysystem\Flysystem\Adapter\MissingAdapter;
   use Drupal\flysystem\Flysystem\Ftp;
   use Drupal\Tests\UnitTestCase;
-  use League\Flysystem\Adapter\Ftp as LeagueFtp;
+  use Drupal\flysystem\Ported\Flysystem\Adapter\Ftp as LeagueFtp;
 
   /**
    * @coversDefaultClass \Drupal\flysystem\Flysystem\Ftp
@@ -65,7 +65,7 @@ namespace Drupal\Tests\flysystem\Unit\Flysystem {
   }
 }
 
-namespace League\Flysystem\Adapter {
+namespace Drupal\flysystem\Ported\Flysystem\Adapter {
 
   /**
    * Stubs ftp_chdir().

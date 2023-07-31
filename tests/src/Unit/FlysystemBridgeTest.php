@@ -8,7 +8,7 @@ use Drupal\flysystem\Flysystem\Missing;
 use Drupal\flysystem\FlysystemBridge;
 use Drupal\flysystem\FlysystemFactory;
 use Drupal\Tests\UnitTestCase;
-use League\Flysystem\Filesystem;
+use Drupal\flysystem\Ported\Flysystem\Filesystem;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -27,7 +27,7 @@ class FlysystemBridgeTest extends UnitTestCase {
   /**
    * File system.
    *
-   * @var \League\Flysystem\FilesystemInterface
+   * @var \Drupal\flysystem\Ported\Flysystem\FilesystemInterface
    */
   protected $filesystem;
 

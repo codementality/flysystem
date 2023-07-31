@@ -9,7 +9,7 @@ use Drupal\Core\Site\Settings;
 use Drupal\flysystem\Flysystem\Adapter\MissingAdapter;
 use Drupal\flysystem\Flysystem\Local;
 use Drupal\Tests\UnitTestCase;
-use League\Flysystem\Adapter\Local as LocalAdapter;
+use Drupal\flysystem\Ported\Flysystem\Adapter\Local as LocalAdapter;
 use Prophecy\Argument;
 
 /**

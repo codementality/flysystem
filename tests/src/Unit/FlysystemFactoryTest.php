@@ -12,9 +12,9 @@ use Drupal\flysystem\Flysystem\Missing;
 use Drupal\flysystem\FlysystemFactory;
 use Drupal\flysystem\Plugin\FlysystemPluginInterface;
 use Drupal\Tests\UnitTestCase;
-use League\Flysystem\Adapter\NullAdapter;
-use League\Flysystem\FilesystemInterface;
-use League\Flysystem\Replicate\ReplicateAdapter;
+use Drupal\flysystem\Ported\Flysystem\Adapter\NullAdapter;
+use Drupal\flysystem\Ported\Flysystem\FilesystemInterface;
+use Drupal\flysystem\Ported\Replicate\ReplicateAdapter;
 use Prophecy\Argument;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 

@@ -56,9 +56,9 @@ function __flysystem_validate_schemes(array &$requirements) {
  */
 function __flysystem_check_dependencies(array &$requirements) {
   $dependencies = [
-    'League\Flysystem\Filesystem' => \Drupal::translation()->translate('Flysystem'),
-    'League\Flysystem\Replicate\ReplicateAdapter' => \Drupal::translation()->translate('replicate adapter'),
-    'Twistor\FlysystemStreamWrapper' => \Drupal::translation()->translate('stream wrapper'),
+    'Drupal\flysystem\Ported\Flysystem\Filesystem' => \Drupal::translation()->translate('Flysystem'),
+    'Drupal\flysystem\Ported\Replicate\ReplicateAdapter' => \Drupal::translation()->translate('replicate adapter'),
+    'Drupal\flysystem\FlysystemStreamWrapper' => \Drupal::translation()->translate('stream wrapper'),
   ];
 
   $missing = array_filter(array_map(function ($dependency) use ($dependencies) {

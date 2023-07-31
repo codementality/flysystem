@@ -10,7 +10,7 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\flysystem\Flysystem\Adapter\MissingAdapter;
 use Drupal\flysystem\Plugin\FlysystemPluginInterface;
 use Drupal\flysystem\Plugin\FlysystemUrlTrait;
-use League\Flysystem\Adapter\Local as LocalAdapter;
+use Drupal\flysystem\Ported\Flysystem\Adapter\Local as LocalAdapter;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**

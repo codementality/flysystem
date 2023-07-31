@@ -6,7 +6,7 @@ use Drupal\Core\Logger\RfcLogLevel;
 use Drupal\flysystem\Flysystem\Adapter\MissingAdapter;
 use Drupal\flysystem\Plugin\FlysystemPluginInterface;
 use Drupal\flysystem\Plugin\FlysystemUrlTrait;
-use League\Flysystem\Adapter\Ftp as FtpAdapter;
+use Drupal\flysystem\Ported\Flysystem\Adapter\Ftp as FtpAdapter;
 
 /**
  * Drupal plugin for the "FTP" Flysystem adapter.

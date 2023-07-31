@@ -3,7 +3,7 @@
 namespace Drupal\flysystem\Plugin;
 
 use Drupal\Core\Url;
-use League\Flysystem\Util;
+use Drupal\flysystem\Ported\Flysystem\Util;
 
 /**
  * Helper trait for generating URLs from adapter plugins.

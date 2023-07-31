@@ -7,7 +7,7 @@ use Drupal\Core\Site\Settings;
 use Drupal\flysystem\FlysystemFactory;
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Twistor\FlysystemStreamWrapper;
+use Drupal\flysystem\FlysystemStreamWrapper;
 
 /**
  * Tests flysystem.install functions.

@@ -8,9 +8,9 @@ namespace Drupal\Tests\flysystem\Unit\Form {
   use Drupal\flysystem\FlysystemFactory;
   use Drupal\flysystem\Form\ConfigForm;
   use Drupal\Tests\UnitTestCase;
-  use League\Flysystem\Filesystem;
-  use League\Flysystem\FilesystemInterface;
-  use League\Flysystem\Memory\MemoryAdapter;
+  use Drupal\flysystem\Ported\Flysystem\Filesystem;
+  use Drupal\flysystem\Ported\Flysystem\FilesystemInterface;
+  use Drupal\flysystem\Ported\Flysystem\Memory\MemoryAdapter;
   use Prophecy\Argument;
   use Psr\Log\LoggerInterface;
   use Symfony\Component\DependencyInjection\ContainerBuilder;

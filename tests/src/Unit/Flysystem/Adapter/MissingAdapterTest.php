@@ -4,7 +4,7 @@ namespace Drupal\Tests\flysystem\Unit\Flysystem\Adapter;
 
 use Drupal\flysystem\Flysystem\Adapter\MissingAdapter;
 use Drupal\Tests\UnitTestCase;
-use League\Flysystem\Config;
+use Drupal\flysystem\Ported\Flysystem\Config;
 
 /**
  * @coversDefaultClass \Drupal\flysystem\Flysystem\Adapter\MissingAdapter

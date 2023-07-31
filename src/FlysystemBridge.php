@@ -4,8 +4,8 @@ namespace Drupal\flysystem;
 
 use Drupal\Core\StreamWrapper\StreamWrapperInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use League\Flysystem\Util;
-use Twistor\FlysystemStreamWrapper;
+use Drupal\flysystem\Ported\Flysystem\Util;
+use Drupal\flysystem\FlysystemStreamWrapper;
 
 /**
  * An adapter for Flysystem to StreamWrapperInterface.
@@ -93,7 +93,7 @@ class FlysystemBridge extends FlysystemStreamWrapper implements StreamWrapperInt
    * @param string $scheme
    *   The scheme.
    *
-   * @return \League\Flysystem\FilesystemInterface
+   * @return \Drupal\flysystem\Ported\Flysystem\FilesystemInterface
    *   The filesystem for the scheme.
    */
   protected function getFilesystemForScheme($scheme) {

@@ -2,8 +2,9 @@
 
 namespace Drupal\flysystem\Flysystem\Adapter;
 
-use League\Flysystem\AdapterInterface;
-use League\Flysystem\Config;
+use Drupal\flysystem\Ported\Flysystem\AdapterInterface;
+use Drupal\flysystem\Ported\Flysystem\Cache;
+use Drupal\flysystem\Ported\Flysystem\Config;
 
 /**
  * A Flysystem adapter implementing caching with Drupal's Cache API.
@@ -13,7 +14,7 @@ class DrupalCacheAdapter implements AdapterInterface {
   /**
    * The Flysystem adapter to cache data for.
    *
-   * @var \League\Flysystem\AdapterInterface
+   * @var \Drupal\flysystem\Ported\Flysystem\AdapterInterface
    */
   protected $adapter;
 
@@ -36,7 +37,7 @@ class DrupalCacheAdapter implements AdapterInterface {
    *
    * @param string $scheme
    *   The scheme of the stream wrapper used for this adapter.
-   * @param \League\Flysystem\AdapterInterface $adapter
+   * @param \Drupal\flysystem\Ported\Flysystem\AdapterInterface $adapter
    *   The flysystem adapter to cache data for.
    * @param \Drupal\flysystem\Flysystem\Adapter\CacheItemBackend $cacheItemBackend
    *   The cache backend to store data in.

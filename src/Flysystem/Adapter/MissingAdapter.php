@@ -2,8 +2,8 @@
 
 namespace Drupal\flysystem\Flysystem\Adapter;
 
-use League\Flysystem\AdapterInterface;
-use League\Flysystem\Config;
+use Drupal\flysystem\AdapterInterface;
+use Drupal\flysystem\Ported\Flysystem\Config;
 
 /**
  * An adapter used when a plugin is missing. It fails at everything.

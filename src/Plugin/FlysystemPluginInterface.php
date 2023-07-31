@@ -14,7 +14,7 @@ interface FlysystemPluginInterface {
    * perform filesystem operations, it should either use a scheme:// or have the
    * \Drupal\flysystem\FlysystemFactory injected.
    *
-   * @return \League\Flysystem\AdapterInterface
+   * @return \Drupal\flysystem\AdapterInterface
    *   The Flysytem adapter.
    */
   public function getAdapter();

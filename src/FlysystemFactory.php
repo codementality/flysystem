@@ -10,8 +10,8 @@ use Drupal\flysystem\Event\EnsureEvent;
 use Drupal\flysystem\Event\FlysystemEvents;
 use Drupal\flysystem\Flysystem\Adapter\CacheItemBackend;
 use Drupal\flysystem\Flysystem\Adapter\DrupalCacheAdapter;
-use League\Flysystem\Filesystem;
-use League\Flysystem\Replicate\ReplicateAdapter;
+use Drupal\flysystem\Ported\Flysystem\Filesystem;
+use Drupal\flysystem\Ported\Replicate\ReplicateAdapter;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -52,7 +52,7 @@ class FlysystemFactory {
   /**
    * A cache of filesystems.
    *
-   * @var \League\Flysystem\FilesystemInterface[]
+   * @var \Drupal\flysystem\Ported\Flysystem\FilesystemInterface[]
    */
   protected $filesystems = [];
 
@@ -112,7 +112,7 @@ class FlysystemFactory {
    * @param string $scheme
    *   The scheme.
    *
-   * @return \League\Flysystem\FilesystemInterface
+   * @return \Drupal\flysystem\Ported\Flysystem\FilesystemInterface
    *   The filesystem for the scheme.
    */
   public function getFilesystem($scheme) {
@@ -203,7 +203,7 @@ class FlysystemFactory {
    * @param string $scheme
    *   The scheme to find an adapter for.
    *
-   * @return \League\Flysystem\AdapterInterface
+   * @return \Drupal\flysystem\AdapterInterface
    *   The correct adapter from settings.
    */
   protected function getAdapter($scheme) {
