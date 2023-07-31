@@ -6,7 +6,7 @@ namespace Drupal\flysystem\Ported\Flysystem;
 use Drupal\flysystem\Ported\Flysystem\Adapter\CanOverwriteFiles;
 use Drupal\flysystem\Ported\Flysystem\Plugin\PluggableTrait;
 use Drupal\flysystem\Ported\Flysystem\Util\ContentListingFormatter;
-
+use Drupal\flysystem\Ported\Flysystem\ConfigAwareTrait;
 
 /**
  * Ported from league/flysystem v1.
