@@ -1,0 +1,13 @@
+#!/bin/bash
+## Description: Build the PatternLab design system
+## Usage: theme <build|watch>
+## Example: "ddev theme build"
+
+function build_theme() {
+  cd ./web/ds;
+  yarn && yarn run $1;
+}
+
+if [ $# = 1 ]; then
+  build_theme $1;
+fi

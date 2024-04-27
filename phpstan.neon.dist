@@ -1,0 +1,17 @@
+parameters:
+  # Ignore tests
+  excludePaths:
+    - *Test.php
+    - *TestBase.php
+    - *StreamWrapper/*FlysystemStreamWrapper.php
+  paths:
+    - web/modules/custom/flysystem
+  level: 5
+  treatPhpDocTypesAsCertain: false
+  reportUnmatchedIgnoredErrors: false
+  ignoreErrors:
+    # new static() is a best practice in Drupal, so we cannot fix that.
+    - "#^Unsafe usage of new static#"
+    # Ignore this error for now.
+    - "#^Plugin definitions cannot be altered.#"
+  

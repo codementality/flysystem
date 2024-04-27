@@ -1,0 +1,23 @@
+#!/bin/bash
+## Description: Run installation sequences in the web container: composer install, build the design system, drush site:install
+## Usage: install
+## Example: "ddev install"
+source "$(dirname "$0")/common.sh"
+
+log "\e[36m--------- Running installation sequences ---------\e[39m"
+
+log "Go to the project root."
+cd "${PWD}" || exit 1;
+
+log "Installing composer dependencies (with development dependencies)."
+composer install --no-interaction --no-progress --apcu-autoloader || exit 1;
+log "Composer packages are installed"
+
+log "Running site installation."
+drush si --existing-config -y || exit 1;
+#drush si minimal --account-pass="drupaladm1n" --site-name=Drupalite --site-mail=lisa@codementality.com
+log "Site installation is finished"
+
+drush uli
+
+log "\e[36m--------- Installation sequences are completed ---------\e[39m"
