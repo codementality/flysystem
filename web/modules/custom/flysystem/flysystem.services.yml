@@ -1,0 +1,10 @@
+services:
+  ## Service Decorators
+  # Decorates the Core FileSystem service:
+  flysystem.filesystem:
+    class: Drupal\flysystem\Decorator\FlysystemDrupalFileSystem
+    public: false
+    decorates: file_system
+    decoration_priority: 1
+    arguments: ['@flysystem.filesystem.inner', '@stream_wrapper_manager', '@settings']
+
