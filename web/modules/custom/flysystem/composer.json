@@ -1,0 +1,16 @@
+{
+  "name": "drupal/flysystem",
+  "type": "drupal-module",
+  "require": {
+    "league/flysystem": "^3.19",
+    "m2mtech/flysystem-stream-wrapper": "^1.4"
+  },
+  "require-dev": {
+    "league/flysystem-memory": "^3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Drupal\\flysystem\\": "src/"
+    }
+  }
+}

@@ -1,0 +1,5 @@
+name: Flysystem
+description: 'Provides access to various filesystem backends using Flysystem.'
+package: Flysystem
+type: module
+core_version_requirement: ^10.3
