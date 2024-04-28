@@ -4,12 +4,11 @@ namespace Drupal\flysystem\Flystream;
 
 use Drupal\Core\StreamWrapper\StreamWrapperInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Elazar\Flystream\StreamWrapper as FlystreamStreamWrapper;
 
 /**
  * Base class for Flystream Stream Wrappers.
  */
-abstract class StreamWrapperBase extends FlystreamStreamWrapper implements StreamWrapperInterface {
+abstract class StreamWrapperBase extends PhpStreamWrapperBase implements StreamWrapperInterface {
 
   use StringTranslationTrait;
 
