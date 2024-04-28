@@ -1,11 +1,11 @@
 <?php
 
-namespace Drupal\flysystem\Flystream;
+namespace Drupal\flysystem\FlyStream;
 
 use Drupal\Core\StreamWrapper\StreamWrapperInterface;
 
 /**
- * Flystream Stream Wrapper implementation of abastract classes.
+ * Flystream Stream Wrapper implementation of abstract classes.
  */
 class StreamWrapper extends StreamWrapperBase {
 

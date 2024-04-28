@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\flysystem\Flystream;
+namespace Drupal\flysystem\FlyStream;
 
 use Drupal\Core\StreamWrapper\StreamWrapperInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;

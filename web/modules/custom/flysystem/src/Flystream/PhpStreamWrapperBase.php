@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\flysystem\Flystream;
+namespace Drupal\flysystem\FlyStream;
 
 use Drupal\Core\StreamWrapper\PhpStreamWrapperInterface;
 use Elazar\Flystream\BufferInterface;
@@ -76,6 +76,10 @@ abstract class PhpStreamWrapperBase implements PhpStreamWrapperInterface {
   public $context;
 
   // phpcs:disable Drupal.NamingConventions.ValidFunctionName.ScopeNotCamelCaps
+
+  public function __construct() {
+
+  }
 
   /**
    * {@inheritdoc}

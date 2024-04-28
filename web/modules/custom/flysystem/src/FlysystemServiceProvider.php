@@ -29,7 +29,7 @@ class FlysystemServiceProvider extends ServiceProviderBase {
       // Registers the FlysystemStreamWrapper.
       // @todo Revisit if this is needed,
       $container
-        ->register('flysystem_stream_wrapper.' . $scheme, 'Drupal\flysystem\Flystream\StreamWrapper')
+        ->register('flysystem_stream_wrapper.' . $scheme, 'Drupal\flysystem\FlyStream\StreamWrapper')
         ->addTag('stream_wrapper', ['scheme' => $scheme]);
 
     }
