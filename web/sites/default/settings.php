@@ -759,6 +759,37 @@ $settings['hash_salt'] = 'RhlRPNIpYIbZNV5A08bNl9QSSwHNwPQs4YAAyU5D1ucfBmZ9mlQsR5
 
 $settings['config_sync_directory'] = '../config/sync';
 
+// Flysystem Search
+
+$schemes = ['local' => [ // The name of the stream wrapper.
+
+  'driver' => 'local', // The plugin key.
+
+  'config' => [
+    // Cache filesystem metadata. Not necessary for the local driver.
+    'cache' => TRUE, 
+    // This will be treated similarly to Drupal's private file system
+    //'root' => '/path/to/dir/outsite/drupal',
+    // Or,
+    // In order fo the public setting to work, the path must be relative
+    // to the root of the Drupal install.
+    'root' => 'sites/default/files/flysystem',
+    'public' => TRUE,
+    // Optional settings that apply to all adapters.
+    // Defaults to Flysystem: scheme.
+    'name' => 'Custom stream wrapper name',
+    'description' => 'Custom description',
+    // Uploads each file to an extra endpoint tha tis considered "write only"
+    // Functions as a backup.
+    // Note: only supports one replication endpoint.
+    // Note: Use as a replication endpoint does not prevent that endpoint from
+    //   also being used for other purposes. 
+    'replicate' => 'ftpexample',
+  ],
+]];
+
+$settings['flysystem'] = $schemes;
+
 // Automatically generated include for settings managed by ddev.
 $ddev_settings = dirname(__FILE__) . '/settings.ddev.php';
 if (getenv('IS_DDEV_PROJECT') == 'true' && is_readable($ddev_settings)) {
