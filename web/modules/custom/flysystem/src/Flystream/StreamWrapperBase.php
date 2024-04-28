@@ -27,18 +27,21 @@ abstract class StreamWrapperBase extends FlystreamStreamWrapper implements Strea
   protected $scheme = NULL;
 
   /**
-   * {@inheritdoc}
+   * The Flysystem adapter identifier used for the stream wrapper.
+   *
+   * @var string|null
    */
-  public static function getType(): int {
-    return StreamWrapperInterface::NORMAL;
-  }
+  protected $adapter = NULL;
 
   /**
    * {@inheritdoc}
    */
-  public function getName(): string {
-    return $this->t('Abstract Class StreamWrapperBaser @scheme', ['@scheme' => $this->scheme]);
-  }
+  abstract public static function getType(): int; 
+
+  /**
+   * {@inheritdoc}
+   */
+  abstract public function getName(): string;
 
   /**
    * {@inheritdoc}
@@ -94,6 +97,16 @@ abstract class StreamWrapperBase extends FlystreamStreamWrapper implements Strea
     $this->scheme = $scheme;
   
     return $scheme . '://' . $dirname;
+  }
+
+  /**
+   * Sets the scheme for the stream wrapper service.
+   *
+   * @param string $scheme
+   *   Scheme identifier.
+   */
+  protected function setScheme($scheme) {
+    $this->scheme = $scheme;
   }
 
 }
