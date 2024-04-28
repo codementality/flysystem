@@ -755,28 +755,16 @@ $settings['entity_update_backup'] = TRUE;
 # if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
+$settings['hash_salt'] = 'RhlRPNIpYIbZNV5A08bNl9QSSwHNwPQs4YAAyU5D1ucfBmZ9mlQsR5IjoHmkOffc_BLcpjH89Q';
 
 $settings['config_sync_directory'] = '../config/sync';
-
-if (file_exists(__DIR__ . '/settings.local.php') && (getenv('IS_DDEV_PROJECT') == 'true')) {
-  include __DIR__ . '/settings.local.php';
-}
 
 // Automatically generated include for settings managed by ddev.
 $ddev_settings = dirname(__FILE__) . '/settings.ddev.php';
 if (getenv('IS_DDEV_PROJECT') == 'true' && is_readable($ddev_settings)) {
   require $ddev_settings;
 }
-$databases['default']['default'] = array (
-  'database' => 'db',
-  'username' => 'db',
-  'password' => 'db',
-  'prefix' => '',
-  'host' => 'db',
-  'port' => 3306,
-  'isolation_level' => 'READ COMMITTED',
-  'driver' => 'mysql',
-  'namespace' => 'Drupal\\mysql\\Driver\\Database\\mysql',
-  'autoload' => 'core/modules/mysql/src/Driver/Database/mysql/',
-);
-$settings['hash_salt'] = 'RhlRPNIpYIbZNV5A08bNl9QSSwHNwPQs4YAAyU5D1ucfBmZ9mlQsR5IjoHmkOffc_BLcpjH89Q';
+
+if (file_exists(__DIR__ . '/settings.local.php') && (getenv('IS_DDEV_PROJECT') == 'true')) {
+  include __DIR__ . '/settings.local.php';
+}
