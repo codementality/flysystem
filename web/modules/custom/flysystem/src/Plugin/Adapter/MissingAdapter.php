@@ -3,8 +3,8 @@
 namespace Drupal\flysystem\Plugin\Adapter;
 
 use Drupal\Core\Logger\RfcLogLevel;
-use Drupal\flysystem\Plugin\FlysystemPluginInterface;
 use Drupal\flysystem\Adapters\FlysystemMissingAdapter;
+use Drupal\flysystem\Plugin\FlysystemPluginInterface;
 
 /**
  * Drupal plugin for the "NullAdapter" Flysystem adapter.

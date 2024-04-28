@@ -2,11 +2,9 @@
 
 namespace Drupal\flysystem\Adapters;
 
-use League\Flysystem\FilesystemAdapter;
 use League\Flysystem\Config;
-use League\Flysystem\FilesystemException;
-use Drupal\flysystem\Adapters\MissingAdapterException;
 use League\Flysystem\FileAttributes;
+use League\Flysystem\FilesystemAdapter;
 
 /**
  * An adapter used when a plugin is missing. It fails at everything.
@@ -27,7 +25,7 @@ class FlysystemMissingAdapter implements FilesystemAdapter {
     return FALSE;
   }
 
-  /** 
+  /**
    * {@inheritdoc}
    */
   public function write(string $path, string $contents, Config $config): void {

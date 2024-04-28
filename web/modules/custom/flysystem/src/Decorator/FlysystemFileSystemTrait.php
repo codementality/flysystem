@@ -4,11 +4,10 @@ namespace Drupal\flysystem\Decorator;
 
 use Drupal\Core\File\Exception\NotRegularFileException;
 use Drupal\Core\File\FileExists;
-use Drupal\Core\StreamWrapper\StreamWrapperInterface;
-use Drupal\Core\Site\Settings;
-use League\Flysystem\FilesystemOperator;
 
 /**
+ * League\Flysystem\Filesystem to Drupal\Core\File\FileSystem conversion.
+ *
  * Contains all logic to convert Drupal's FileSystem service methods to utilize
  * League\Flysystem\Filesystem methods and logic.
  *
@@ -19,13 +18,12 @@ use League\Flysystem\FilesystemOperator;
 trait FlysystemFileSystemTrait {
 
   /**
-   * Converts Drupal's FileSystem::chmod() method to leverage
-   * League\Flysystem\FilesystemOperator methods.
+   * Converts Drupal's FileSystem::chmod() to FilesystemOperator methods.
    *
    * @param \League\Flysystem\FilesystemOperator $wrapper
    *   Drupal StreamWrapper service.
    * @param string $uri
-   *   A string containing a URI file, or directory path
+   *   A string containing a URI file, or directory path.
    * @param int $mode
    *   Integer value for permissions.
    *
@@ -55,8 +53,7 @@ trait FlysystemFileSystemTrait {
   }
 
   /**
-   * Converts Drupal's FileSystem::mkdir() method to leverage
-   * League\Flysystem\FilesystemOperator methods.
+   * Converts Drupal's FileSystem::mkdir() to FilesystemOperator methods.
    *
    * @param \League\Flysystem\FilesystemOperator $wrapper
    *   Drupal StreamWrapper service.
@@ -69,7 +66,7 @@ trait FlysystemFileSystemTrait {
    *   Create directories recursively, defaults to FALSE. Cannot work with a
    *   mode which denies writing or execution to the owner of the process.
    * @param resource $context
-   *   Refer to http://php.net/manual/ref.stream.php
+   *   Refer to http://php.net/manual/ref.stream.php.
    *
    * @return bool
    *   Boolean TRUE on success, or FALSE on failure.
@@ -92,15 +89,14 @@ trait FlysystemFileSystemTrait {
   }
 
   /**
-   * Converts Drupal's FileSystem::rmdir() method to leverage
-   * League\Flysystem\FilesystemOperator methods.
+   * Converts Drupal's FileSystem::rmdir() to FilesystemOperator methods.
    *
    * @param \League\Flysystem\FilesystemOperator $wrapper
    *   Drupal StreamWrapper service.
    * @param string $uri
    *   A URI or pathname.
    * @param resource $context
-   *   Refer to http://php.net/manual/ref.stream.php
+   *   Refer to http://php.net/manual/ref.stream.php.
    *
    * @return bool
    *   Boolean TRUE on success, or FALSE on failure.
@@ -123,8 +119,7 @@ trait FlysystemFileSystemTrait {
   }
 
   /**
-   * Converts Drupal's FileSystem::copy() method to leverage
-   * League\Flysystem\FilesystemOperator methods.
+   * Converts Drupal's FileSystem::copy() to FilesystemOperator methods.
    *
    * @param \League\Flysystem\FilesystemOperator $wrapper
    *   Drupal StreamWrapper service.
@@ -138,10 +133,10 @@ trait FlysystemFileSystemTrait {
    *
    * @return string
    *   The path to the new file.
-   * 
+   *
    * @todo Rewrite to leverage Flysystem (yes)
    */
-  protected function copyFs($wrapper, $source, $destination, $fileExists): string  {
+  protected function copyFs($wrapper, $source, $destination, $fileExists): string {
     try {
       // @todo figure out how to utilize directory permissions, see notes on
       // Flysystem VisibilityConverter.
@@ -157,15 +152,14 @@ trait FlysystemFileSystemTrait {
   }
 
   /**
-   * Converts Drupal's FileSystem::delete() method to leverage
-   * League\Flysystem\FilesystemOperator methods.
+   * Converts Drupal's FileSystem::delete() to FilesystemOperator methods.
    *
    * @param \League\Flysystem\FilesystemOperator $wrapper
    *   Drupal StreamWrapper service.
    * @param string $path
    *   A string containing a file path or (streamwrapper) URI.
    *
-   * @return TRUE
+   * @return true
    *   Always return true, unless an exception is thrown.
    *
    * @todo finish writing, see inline todo comments.
@@ -175,7 +169,7 @@ trait FlysystemFileSystemTrait {
       throw new NotRegularFileException("Cannot delete '$path' because it is a directory. Use deleteRecursive() instead.");
     }
     if ($wrapper->fileExists($path)) {
-      try {   
+      try {
         $wrapper->delete($path);
       }
       catch (\Exception $e) {
@@ -188,8 +182,7 @@ trait FlysystemFileSystemTrait {
   }
 
   /**
-   * Converts Drupal's FileSystem::deleteRecursive() method to leverage
-   * League\Flysystem\FilesystemOperator methods.
+   * Drupal's FileSystem::deleteRecursive() to FilesystemOperator methods.
    *
    * @param \League\Flysystem\FilesystemOperator $wrapper
    *   Drupal StreamWrapper service.
@@ -220,8 +213,7 @@ trait FlysystemFileSystemTrait {
   }
 
   /**
-   * Converts Drupal's FileSystem::move() method to leverage
-   * League\Flysystem\FilesystemOperator methods.
+   * Converts Drupal's FileSystem::move() to FilesystemOperator methods.
    *
    * @param \League\Flysystem\FilesystemOperator $wrapper
    *   Drupal StreamWrapper service.
@@ -233,7 +225,7 @@ trait FlysystemFileSystemTrait {
    *   default scheme (public://) will be used.
    * @param \Drupal\Core\File\FileExists|int $fileExists
    *   Replace behavior when the destination file already exists.
-   * 
+   *
    * @return string
    *   The path to the new file.
    *
@@ -256,8 +248,7 @@ trait FlysystemFileSystemTrait {
   }
 
   /**
-   * Converts Drupal's FileSystem::saveData() method to leverage
-   * League\Flysystem\FilesystemOperator methods.
+   * Converts Drupal's FileSystem::saveData() to FilesystemOperator methods.
    *
    * @param \League\Flysystem\FilesystemOperator $wrapper
    *   Drupal StreamWrapper service.
@@ -293,8 +284,7 @@ trait FlysystemFileSystemTrait {
   }
 
   /**
-   * Converts Drupal's FileSystem::prepareDirectory() method to leverage
-   * League\Flysystem\FilesystemOperator methods.
+   * Drupal's FileSystem::prepareDirecctory() to FilesystemOperator methods.
    *
    * @param \League\Flysystem\FilesystemOperator $wrapper
    *   Drupal StreamWrapper service.
@@ -314,7 +304,8 @@ trait FlysystemFileSystemTrait {
    * @see \League\Flysystem\FilesystemOperator::directoryExists()
    */
   protected function prepareDirectoryFs($wrapper, &$directory, $options): bool {
-    // How do we use the flags, self::MODIFY_PERMISSIONS and static::CREATE_DIRECTORY here?
+    // How do we use the flags, self::MODIFY_PERMISSIONS and
+    // static::CREATE_DIRECTORY here?
     // @see Drupal\Core\File\FileSystemInterface::prepareDirectory().
     try {
       // Let mkdir() recursively create directories and use the default
@@ -338,8 +329,7 @@ trait FlysystemFileSystemTrait {
   }
 
   /**
-   * Converts Drupal's FileSystem::createFilename() method to leverage
-   * League\Flysystem\FilesystemOperator methods.
+   * Drupal's FileSystem::createFilename() to FilesystemOperator methods.
    *
    * @param \League\Flysystem\FilesystemOperator $wrapper
    *   Drupal StreamWrapper service.
@@ -389,8 +379,7 @@ trait FlysystemFileSystemTrait {
   }
 
   /**
-   * Converts Drupal's FileSystem::createFilename() method to leverage
-   * League\Flysystem\FilesystemOperator methods.
+   * FileSystem::getDestinationFilename() to FilesystemOperator methods.
    *
    * @param \League\Flysystem\FilesystemOperator $wrapper
    *   Drupal StreamWrapper service.
@@ -417,7 +406,8 @@ trait FlysystemFileSystemTrait {
 
           case FileExists::Rename:
             // Hmm, we are using the original Drupal FileSystem::dirname()
-            // method here, will it error out?  Do we actually need to call this?
+            // method here, will it error out?  Do we actually need to call
+            // this?
             $directory = $this->dirname($destination);
             $destination = $this->createFilename($basename, $directory);
             break;
@@ -434,4 +424,5 @@ trait FlysystemFileSystemTrait {
     }
     return $destination;
   }
+
 }

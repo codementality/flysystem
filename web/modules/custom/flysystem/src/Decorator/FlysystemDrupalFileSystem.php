@@ -6,15 +6,11 @@ use Drupal\Component\Utility\Unicode;
 use Drupal\Core\File\Exception\FileException;
 use Drupal\Core\File\Exception\FileWriteException;
 use Drupal\Core\File\Exception\InvalidStreamWrapperException;
-use Drupal\Core\File\Exception\NotRegularFileException;
-use Drupal\Core\File\FileSystem;
-use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\File\FileExists;
+use Drupal\Core\File\FileSystem;
 use Drupal\Core\Site\Settings;
-use Drupal\Core\StreamWrapper\StreamWrapperInterface;
 use Drupal\Core\StreamWrapper\StreamWrapperManager;
 use Drupal\Core\StreamWrapper\StreamWrapperManagerInterface;
-use Drupal\flysystem\Decorator\FlysystemFileSystemTrait;
 use League\Flysystem\FilesystemOperator;
 
 /**
@@ -22,7 +18,7 @@ use League\Flysystem\FilesystemOperator;
  *
  * Unmodified public methods:
  * - ::basename
- * - ::getTempDirectory
+ * - ::getTempDirectory.
  *
  * The trait FlysystemFileSystemTrait contains the logic that is passed to the
  * Flysystem Stream Wrapper instance.
@@ -148,7 +144,7 @@ class FlysystemDrupalFileSystem extends FileSystem {
     $wrapper = $this->streamWrapperManager->getViaUri($path);
     if ($wrapper instanceof FilesystemOperator) {
       return $this->deleteFs($wrapper, $path);
-    }    
+    }
     return $this->decoratedService->delete($path);
   }
 
@@ -181,7 +177,6 @@ class FlysystemDrupalFileSystem extends FileSystem {
 
   /**
    * {@inheritdoc}
-   *
    */
   public function saveData($data, $destination, $fileExists = FileExists::Rename) {
     // Write the data to a temporary file.
@@ -220,7 +215,6 @@ class FlysystemDrupalFileSystem extends FileSystem {
 
   /**
    * {@inheritdoc}
-   *
    */
   public function createFilename($basename, $directory) {
     $original = $basename;
@@ -269,4 +263,3 @@ class FlysystemDrupalFileSystem extends FileSystem {
   }
 
 }
-

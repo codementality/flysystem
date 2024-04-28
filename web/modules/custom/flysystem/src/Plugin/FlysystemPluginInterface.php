@@ -10,7 +10,7 @@ interface FlysystemPluginInterface {
   /**
    * Returns the Flysystem adapter.
    *
-   * Plugins should not keep references to the adapter. 
+   * Plugins should not keep references to the adapter.
    *
    * @return \League\Flysystem\FilesystemAdapter
    *   The Flysytem adapter.

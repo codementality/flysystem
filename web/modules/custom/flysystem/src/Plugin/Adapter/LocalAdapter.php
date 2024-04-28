@@ -7,14 +7,11 @@ use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\File\FileSystem;
 use Drupal\Core\Logger\RfcLogLevel;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\flysystem\Plugin\Adapter\MissingAdapter;
-use Drupal\flysystem\Plugin\FlysystemPluginInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use League\Flysystem\FilesystemAdapter;
-use League\Flysystem\Local\LocalFilesystemAdapter;
 use Drupal\flysystem\Adapters\FlysystemMissingAdapter;
+use Drupal\flysystem\Plugin\FlysystemPluginInterface;
 use Drupal\flysystem\Plugin\Trait\FlysystemUrlTrait;
-//use League\Flysystem\Config;
+use League\Flysystem\Local\LocalFilesystemAdapter;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Drupal plugin for the "Local" Flysystem adapter.
@@ -191,4 +188,3 @@ class LocalAdapter implements FlysystemPluginInterface, ContainerFactoryPluginIn
   }
 
 }
-

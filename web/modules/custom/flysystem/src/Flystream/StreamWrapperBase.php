@@ -2,13 +2,14 @@
 
 namespace Drupal\flysystem\Flystream;
 
-use Elazar\Flystream\StreamWrapper as FlystreamStreamWrapper;
 use Drupal\Core\StreamWrapper\StreamWrapperInterface;
-use Drupal\Core\StreamWrapper\StreamWrapperManagerInterface;
-use Drupal\Core\StreamWrapper\StreamWrapperManager;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Elazar\Flystream\StreamWrapper as FlystreamStreamWrapper;
 
-abstract class StreamWrapperBase extends FlystreamStreamWrapper implements StreamWrapperInterface {  
+/**
+ * Base class for Flystream Stream Wrappers.
+ */
+abstract class StreamWrapperBase extends FlystreamStreamWrapper implements StreamWrapperInterface {
 
   use StringTranslationTrait;
 
@@ -20,7 +21,7 @@ abstract class StreamWrapperBase extends FlystreamStreamWrapper implements Strea
   protected $uri = NULL;
 
   /**
-   * The destination scheme for the stream wrapper
+   * The destination scheme for the stream wrapper.
    *
    * @var string|null
    */
@@ -36,7 +37,7 @@ abstract class StreamWrapperBase extends FlystreamStreamWrapper implements Strea
   /**
    * {@inheritdoc}
    */
-  abstract public static function getType(): int; 
+  abstract public static function getType(): int;
 
   /**
    * {@inheritdoc}
@@ -80,6 +81,7 @@ abstract class StreamWrapperBase extends FlystreamStreamWrapper implements Strea
     }
     return $this->uri;
   }
+
   /**
    * {@inheritdoc}
    */
@@ -88,14 +90,14 @@ abstract class StreamWrapperBase extends FlystreamStreamWrapper implements Strea
       $uri = $this->uri;
     }
 
-    list($scheme, $target) = explode('://', $uri, 2);
+    [$scheme, $target] = explode('://', $uri, 2);
     $dirname = dirname($target);
 
     if ($dirname == '.') {
       $dirname = '';
     }
     $this->scheme = $scheme;
-  
+
     return $scheme . '://' . $dirname;
   }
 

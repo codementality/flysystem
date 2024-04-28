@@ -5,7 +5,6 @@ namespace Drupal\flysystem;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\DependencyInjection\ServiceProviderBase;
 use Drupal\Core\Site\Settings;
-use Drupal\flysystem\Asset\SchemeExtensionTrait;
 
 /**
  * Flysystem dependency injection container.
