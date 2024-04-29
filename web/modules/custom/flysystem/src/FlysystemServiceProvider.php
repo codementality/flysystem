@@ -26,10 +26,13 @@ class FlysystemServiceProvider extends ServiceProviderBase {
       if (empty($settings['driver'])) {
         continue;
       }
+      else {
+        
+      }
       // Registers the FlyStreamWrapper.
       // @todo Revisit if this is needed,
       $container
-        ->register('flysystem_stream_wrapper.' . $scheme, 'Drupal\flysystem\FlyStream\FlyStreamWrapper')
+        ->register('flysystem_stream_wrapper.' . $scheme, 'Drupal\\flysystem\\FlyStream\\FlyStreamWrapper')
         ->addTag('stream_wrapper', ['scheme' => $scheme]);
 
     }

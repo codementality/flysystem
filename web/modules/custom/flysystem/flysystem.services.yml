@@ -1,6 +1,6 @@
 services:
   ## Service Decorators
-  # Decorates the Core FileSystem service:
+  # Decorates the Core FileSystem service
   flysystem.filesystem:
     class: Drupal\flysystem\Decorator\FlysystemDrupalFileSystem
     public: false
