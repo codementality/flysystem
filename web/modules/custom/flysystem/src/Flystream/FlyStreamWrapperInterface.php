@@ -9,6 +9,9 @@ use League\Flysystem\Visibility;
  */
 interface FlyStreamWrapperInterface {
 
+  public const LOCK_STORE = 'lock_store';
+  public const LOCK_TTL = 'lock_ttl';
+
   public const IGNORE_VISIBILITY_ERRORS = 'ignore_visibility_errors';
 
   public const EMULATE_DIRECTORY_LAST_MODIFIED = 'emulate_directory_last_modified';
@@ -21,9 +24,6 @@ interface FlyStreamWrapperInterface {
   public const VISIBILITY_DIRECTORY_PUBLIC = 'visibility_directory_public';
   public const VISIBILITY_DIRECTORY_PRIVATE = 'visibility_directory_private';
   public const VISIBILITY_DEFAULT_FOR_DIRECTORIES = 'visibility_default_for_directories';
-
-  public const LOCK_STORE = 'flock:///tmp';
-  public const LOCK_TTL = 300;
 
   public const DEFAULT_CONFIGURATION = [
     // Const LOCK_STORE.

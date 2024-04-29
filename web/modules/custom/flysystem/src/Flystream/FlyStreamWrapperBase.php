@@ -18,7 +18,6 @@ use Drupal\flysystem\FlyStream\Exception\UnableToChangePermissionsException;
 use Drupal\flysystem\FlyStream\Exception\UnableToCreateDirectoryException;
 use Drupal\flysystem\FlyStream\Exception\UnableToReadException;
 use Drupal\flysystem\FlyStream\Exception\UnableToWriteException;
-use Elazar\Flystream\ServiceLocator;
 use League\Flysystem\Config;
 use League\Flysystem\FilesystemException;
 use League\Flysystem\StorageAttributes;
@@ -26,7 +25,6 @@ use League\Flysystem\UnableToRetrieveMetadata;
 use League\Flysystem\UnixVisibility\PortableVisibilityConverter;
 use League\Flysystem\Visibility;
 use League\Flysystem\WhitespacePathNormalizer;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Lock\Key;
 use Symfony\Component\Lock\Lock;
 use Symfony\Component\Lock\Store\StoreFactory;
@@ -58,20 +56,6 @@ class FlyStreamWrapperBase implements PhpStreamWrapperInterface, FlyStreamWrappe
    * @var \Iterator|\IteratorAggregate|\Traversable|null
    */
   protected $dir = NULL;
-
-  /**
-   * File resource.
-   *
-   * @var resource|null
-   */
-  private $read = NULL;
-
-  /**
-   * Stream buffer.
-   *
-   * @var \Elazar\Flystream\BufferInterface|\League\Flysystem\FilesystemOperator|null
-   */
-  private $buffer = NULL;
 
   /**
    * Resource context.
@@ -187,8 +171,8 @@ class FlyStreamWrapperBase implements PhpStreamWrapperInterface, FlyStreamWrappe
     }
     catch (FilesystemException $e) {
       return self::triggerError(
-            UnableToCreateDirectoryException::atLocation(__METHOD__, $path, $e)
-            );
+        UnableToCreateDirectoryException::atLocation(__METHOD__, $path, $e)
+      );
     }
   }
 
@@ -198,9 +182,7 @@ class FlyStreamWrapperBase implements PhpStreamWrapperInterface, FlyStreamWrappe
    * @todo Done
    */
   public function rename($path_from, $path_to): bool {
-
     $this->current->setPath($path_from);
-
     $errorLocation = $path_from . ',' . $path_to;
     if (!file_exists($path_from)) {
       return self::triggerError(FileNotFoundException::atLocation(__METHOD__, $errorLocation));
@@ -221,7 +203,6 @@ class FlyStreamWrapperBase implements PhpStreamWrapperInterface, FlyStreamWrappe
 
     try {
       $this->current->filesystem->move($this->current->file, FlyStreamData::getFile($path_to));
-
       return TRUE;
     }
     catch (FilesystemException $e) {
@@ -229,7 +210,6 @@ class FlyStreamWrapperBase implements PhpStreamWrapperInterface, FlyStreamWrappe
             DirectoryNotEmptyException::atLocation(__METHOD__, $errorLocation, $e)
             );
     }
-
   }
 
   /**
@@ -325,17 +305,7 @@ class FlyStreamWrapperBase implements PhpStreamWrapperInterface, FlyStreamWrappe
               );
       }
     }
-
     fclose($this->current->handle);
-    $this->log('info', __METHOD__);
-    if ($this->read !== NULL) {
-      fclose($this->read);
-      $this->read = NULL;
-    }
-    if ($this->buffer !== NULL) {
-      $this->buffer->close();
-      $this->buffer = NULL;
-    }
   }
 
   /**
@@ -921,39 +891,6 @@ class FlyStreamWrapperBase implements PhpStreamWrapperInterface, FlyStreamWrappe
       $lastModified = max($lastModified, $item->lastModified());
     }
     return $lastModified;
-  }
-
-  /**
-   * Gets Flysystem Filesytem object associated with scheme.
-   *
-   * @param string $key
-   *   The Filesystem scheme.
-   *
-   * @return \League\Flysystem\FilesystemOperator
-   *   Flysystem Filesystem instance associated with scheme.
-   */
-  private function get(string $key) {
-    return ServiceLocator::get($key);
-  }
-
-  /**
-   * Logs messages.
-   *
-   * @param string $level
-   *   Level of message to log.
-   * @param string $message
-   *   Specific message text to log.
-   * @param array $context
-   *   Array of context options for logging.
-   */
-  private function log(
-    string $level,
-    string $message,
-    array $context = [],
-  ): void {
-    /** @var \Psr\Log\LoggerInterface $logger */
-    $logger = $this->get(LoggerInterface::class);
-    $logger->log($level, $message, $context);
   }
 
 }
