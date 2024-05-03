@@ -1,0 +1,4 @@
+entity.flysystem_adapter.edit_form:
+  route_name: entity.flysystem_adapter.edit_form
+  base_route: entity.flysystem_adapter.canonical
+  title: 'Edit'

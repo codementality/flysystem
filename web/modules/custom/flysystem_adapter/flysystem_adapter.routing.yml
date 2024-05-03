@@ -1,0 +1,39 @@
+entity.flysystem_adapter.collection:
+  path: '/admin/config/media/flysystem-adapter'
+  defaults:
+    _entity_list: 'flysystem_adapter'
+    _title: 'Flysystem adapter configuration'
+  requirements:
+    _permission: 'administer flysystem_adapter'
+
+entity.flysystem_adapter.canonical:
+  path: '/admin/config/media/flysystem-adapter'
+  defaults:
+    _entity_list: 'flysystem_adapter'
+    _title: 'Flysystem adapter configuration'
+  requirements:
+    _permission: 'administer flysystem_adapter'
+
+entity.flysystem_adapter.add_form:
+  path: '/admin/config/media/flysystem_adapter/add'
+  defaults:
+    _entity_form: 'flysystem_adapter.add'
+    _title: 'Add a flysystem adapter'
+  requirements:
+    _permission: 'administer flysystem_adapter'
+
+entity.flysystem_adapter.edit_form:
+  path: '/admin/config/media/flysystem-adapter/{flysystem_adapter}'
+  defaults:
+    _entity_form: 'flysystem_adapter.edit'
+    _title: 'Edit a flysystem adapter'
+  requirements:
+    _permission: 'administer flysystem_adapter'
+
+entity.flysystem_adapter.delete_form:
+  path: '/admin/config/media/flysystem-adapter/{flysystem_adapter}/delete'
+  defaults:
+    _entity_form: 'flysystem_adapter.delete'
+    _title: 'Delete a flysystem adapter'
+  requirements:
+    _permission: 'administer flysystem_adapter'
