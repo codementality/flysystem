@@ -5,3 +5,4 @@ dependencies: {  }
 id: test
 label: Test
 description: 'This is a test'
+adapter_type: local
