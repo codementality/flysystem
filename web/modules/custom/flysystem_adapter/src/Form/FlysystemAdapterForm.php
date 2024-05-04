@@ -71,53 +71,32 @@ class FlysystemAdapterForm extends EntityForm {
    * {@inheritdoc}
    */
   public function form(array $form, FormStateInterface $form_state): array {
+    // If the form is being rebuilt, rebuild the entity with the current form
+    // values.
+    if ($form_state->isRebuilding()) {
+      $this->entity = $this->buildEntity($form, $form_state);
+    }
 
     $form = parent::form($form, $form_state);
 
     /** @var \Drupal\flysystem_adapter\FlysystemAdapterInterface $adapterPlugin */
     $adapterPlugin = $this->getEntity();
-    
-    //@todo fix error
-    /*
-    TypeError: Drupal\flysystem_adapter\Plugin\FlysystemAdapterConfig\
-       LocalAdapter::label(): Return value must be of type string, null
-       returned in Drupal\flysystem_adapter\Plugin\FlysystemAdapterConfig\
-       LocalAdapter->label() (line 152 of modules/custom/flysystem_adapter/src/
-       Plugin/FlysystemAdapterConfig/LocalAdapter.php).
-    Drupal\flysystem_adapter\Form\FlysystemAdapterForm->getAvailableAdapterPlugins() (Line: 89)
-    */
-    [$options, $descriptions] = $this->getAvailableAdapterPlugins($adapterPlugin);
+  
+    // Set the page title according to whether we are creating or editing the
+    // adapter plugin
+    if ($adapterPlugin->isNew()) {
+      $form['#title'] = $this->t('Add Flysytem Adapter');
+    }
+    else {
+      $form['#title'] = $this->t('Edit Flysystem Adapter %label', ['%label' => $adapterPlugin->label()]);
+    }
 
-    $default = count($options) == 1 ? (string) array_key_first($options): NULL;
+    $this->buildEntityForm($form, $form_state, $adapterPlugin);
 
-    $form['label'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Label'),
-      '#maxlength' => 255,
-      '#default_value' => $this->entity->label(),
-      '#required' => TRUE,
-    ];
-
-    $form['id'] = [
-      '#type' => 'machine_name',
-      '#default_value' => $adapterPlugin->id(),
-      '#machine_name' => [
-        'exists' => [FlysystemAdapter::class, 'load'],
-      ],
-      '#disabled' => !$adapterPlugin->isNew(),
-    ];
-
-    $form['status'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Enabled'),
-      '#default_value' => $adapterPlugin->status(),
-    ];
-
-    $form['description'] = [
-      '#type' => 'textarea',
-      '#title' => $this->t('Description'),
-      '#default_value' => $adapterPlugin->description(),
-    ];
+    if ($form) {
+      $this->buildAdapterConfigForm($form, $form_state, $adapterPlugin);
+    }
+    return $form;
 
     $form['adapter_type'] = [
       '#type' => 'radios',
@@ -136,10 +115,83 @@ class FlysystemAdapterForm extends EntityForm {
 
     $form['adapter_type'] += $descriptions;
 
-    if ($form) {
-      $this->buildAdapterConfigForm($form, $form_state, $adapterPlugin);
+    [$options, $descriptions] = $this->getAvailableAdapterPlugins($adapterPlugin);
+
+    $default = count($options) == 1 ? (string) array_key_first($options): NULL;
+
+
+  }
+
+/**
+   * Builds the form for the basic server properties.
+   *
+   * @param array $form
+   *   The current form array.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The current form state.
+   * @param \Drupal\flysystem_adapter\FlysystemAdapterInterface $adapterPlugin
+   *   The server that is being created or edited.
+   */
+  public function buildEntityForm(array &$form, FormStateInterface $form_state, FlysystemAdapterInterface $adapterPlugin) {
+
+    //$form['#attached']['library'][] = 'search_api/drupal.search_api.admin_css';
+  
+    $form['name'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Adapter Plugin name'),
+      '#description' => $this->t('Enter the displayed name for the adapter plugin.'),
+      '#default_value' => $adapterPlugin->label(),
+      '#required' => TRUE,
+    ];
+
+    $form['id'] = [
+      '#type' => 'machine_name',
+      '#default_value' => $adapterPlugin->isNew() ? NULL : $adapterPlugin->id(),
+      '#maxlength' => 50,
+      '#required' => TRUE,
+      '#machine_name' => [
+        'exists' => '\Drupal\flysystem_adapter\Entity\FlysystemAdapter::load',
+        'source' => ['name'],
+      ],
+      '#disabled' => !$adapterPlugin->isNew(),
+    ];
+
+    $form['status'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Enabled'),
+      '#description' => $this->t('Only enabled adapter plugins can be configured for file management.'),
+      '#default_value' => $adapterPlugin->status(),
+    ];
+
+    $form['description'] = [
+      '#type' => 'textarea',
+      '#title' => $this->t('Description'),
+      '#description' => $this->t('Enter a description for the adapter plugin.'),
+      '#default_value' => $adapterPlugin->getDescription(),
+    ];
+
+    $adapters = $this->adapterPluginManager->getDefinitions();
+    $adapter_options = [];
+    $descriptions = [];
+
+    foreach ($adapterss as $adapter_id => $definition) {
+      $config = $adapter_id === $adapterPlugin->getAdapterId() ? $adapterPlugin->getAdapterConfig() : [];
+      $config['#adapter-plugin'] = $adapterPlugin;
+      try {
+        /** @var \Drupal\search_api\Backend\BackendInterface $backend */
+        $adapter = $this->adapterPluginManager
+          ->createInstance($adapter_id, $config);
+      }
+      catch (PluginException) {
+        continue;
+      }
+      if ($backend->isHidden()) {
+        continue;
+      }
+      $backend_options[$backend_id] = Utility::escapeHtml($backend->label());
+      $descriptions[$backend_id]['#description'] = Utility::escapeHtml($backend->getDescription());
     }
-    return $form;
+    asort($backend_options, SORT_NATURAL | SORT_FLAG_CASE);
 
   }
 
