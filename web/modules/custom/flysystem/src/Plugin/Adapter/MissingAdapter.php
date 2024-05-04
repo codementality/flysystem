@@ -4,14 +4,17 @@ namespace Drupal\flysystem\Plugin\Adapter;
 
 use Drupal\Core\Logger\RfcLogLevel;
 use Drupal\flysystem\Adapters\FlysystemMissingAdapter;
-use Drupal\flysystem\Plugin\FlysystemPluginInterface;
 
 /**
  * Drupal plugin for the "NullAdapter" Flysystem adapter.
  *
- * @FlysystemAdapter(id = "missing")
+ * @FlysystemAdapter(
+ *   id = "missing"
+ *   label = "Local Adapter",
+ *   description = "Flysystem Local Adapter"
+ * )
  */
-class MissingAdapter implements FlysystemPluginInterface {
+class MissingAdapter extends AdapterPluginBase {
 
   /**
    * {@inheritdoc}
@@ -23,7 +26,7 @@ class MissingAdapter implements FlysystemPluginInterface {
   /**
    * {@inheritdoc}
    */
-  public function getExternalUrl($uri) {
+  public function getExternalUrl($uri, $isSecureRequest = FALSE) {
     return '';
   }
 
@@ -38,6 +41,23 @@ class MissingAdapter implements FlysystemPluginInterface {
         'context' => [],
       ],
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * @todo Complete this method.
+   */
+  public function getConfiguration() {
+    return [];
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * @todo Complete this method.
+   */
+  public function setConfiguration($adapterConfig) {
   }
 
 }

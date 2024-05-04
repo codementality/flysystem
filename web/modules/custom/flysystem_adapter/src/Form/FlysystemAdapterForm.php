@@ -167,15 +167,15 @@ class FlysystemAdapterForm extends EntityForm {
       '#type' => 'textarea',
       '#title' => $this->t('Description'),
       '#description' => $this->t('Enter a description for the adapter plugin.'),
-      '#default_value' => $adapterPlugin->getDescription(),
+      '#default_value' => $adapterPlugin->description(),
     ];
 
     $adapters = $this->adapterPluginManager->getDefinitions();
     $adapter_options = [];
     $descriptions = [];
 
-    foreach ($adapterss as $adapter_id => $definition) {
-      $config = $adapter_id === $adapterPlugin->getAdapterId() ? $adapterPlugin->getAdapterConfig() : [];
+    foreach ($adapters as $adapter_id => $definition) {
+      $config = $adapter_id === $adapterPlugin->id() ? $adapterPlugin->getAdapterConfig() : [];
       $config['#adapter-plugin'] = $adapterPlugin;
       try {
         /** @var \Drupal\search_api\Backend\BackendInterface $backend */
@@ -188,10 +188,10 @@ class FlysystemAdapterForm extends EntityForm {
       if ($backend->isHidden()) {
         continue;
       }
-      $backend_options[$backend_id] = Utility::escapeHtml($backend->label());
-      $descriptions[$backend_id]['#description'] = Utility::escapeHtml($backend->getDescription());
+      $adapter_config_options[$adapter_id] = Utility::escapeHtml($adapter->label());
+      $descriptions[$adapter_id]['#description'] = Utility::escapeHtml($adapter->description());
     }
-    asort($backend_options, SORT_NATURAL | SORT_FLAG_CASE);
+    asort($adapter_config_options, SORT_NATURAL | SORT_FLAG_CASE);
 
   }
 

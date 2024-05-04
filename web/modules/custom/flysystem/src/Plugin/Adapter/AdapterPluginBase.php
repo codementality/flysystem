@@ -1,11 +1,13 @@
 <?php
 
-namespace Drupal\flysystem\Plugin;
+namespace Drupal\flysystem\Plugin\Adapter;
+
+use Drupal\flysystem\Plugin\FlysystemAdapterPluginInterface;
 
 /**
- * Interface definition for Flysystem plugins.
+ * Abstract class to be extended by modules providing Adapter plugins.
  */
-interface FlysystemPluginInterface {
+abstract class AdapterPluginBase implements FlysystemAdapterPluginInterface {
 
   /**
    * Returns the Flysystem adapter.
@@ -13,9 +15,9 @@ interface FlysystemPluginInterface {
    * Plugins should not keep references to the adapter.
    *
    * @return \League\Flysystem\FilesystemAdapter
-   *   The Flysytem adapter.
+   *   The Flysystem adapter.
    */
-  public function getAdapter();
+  abstract public function getAdapter();
 
   /**
    * Returns a web accessible URL for the resource.
@@ -27,11 +29,13 @@ interface FlysystemPluginInterface {
    *
    * @param string $uri
    *   The URI to provide a URL for.
+   * @param bool $isSecureRequest
+   *   TRUE for secure requests, FALSE if insecure requests allowed.
    *
    * @return string
    *   Returns a string containing a web accessible URL for the resource.
    */
-  public function getExternalUrl($uri);
+  abstract public function getExternalUrl($uri, $isSecureRequest = TRUE);
 
   /**
    * Checks the sanity of the filesystem.
@@ -41,6 +45,6 @@ interface FlysystemPluginInterface {
    * @return array
    *   A list of error messages.
    */
-  public function ensure($force = FALSE);
+  abstract public function ensure($force = FALSE);
 
 }

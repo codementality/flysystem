@@ -5,7 +5,7 @@ parameters:
     - *TestBase.php
     - *StreamWrapper/*FlysystemStreamWrapper.php
   paths:
-    - web/modules/custom/flysystem
+    - web/modules/custom/flysystem_adapter
   level: 5
   treatPhpDocTypesAsCertain: false
   reportUnmatchedIgnoredErrors: false

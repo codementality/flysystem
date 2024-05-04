@@ -23,7 +23,7 @@ class FlyRegisterStreamWrappers implements CompilerPassInterface {
   public function process(ContainerBuilder $container): void {
     /** @var \Drupal\Core\Config\CachedStorage $config_storage */
     $config_storage = $container->get('config.storage');
-    $entity_config_names = $config_storage->listAll('streamwrapper.fly_streamwrapper');
+    $entity_config_names = $config_storage->listAll('adapter.flysystem_adapter');
     $configured_entities = $config_storage->readMultiple($entity_config_names);
 
     foreach ($configured_entities as $key) {
@@ -40,7 +40,7 @@ class FlyRegisterStreamWrappers implements CompilerPassInterface {
       $service_definition = new Definition(FlyStreamWrapper::class);
       $service_definition->setTags(
         [
-          'stream_wrapper' => [
+          'flysysytem_adapter' => [
             [
               'scheme' => $key['id'],
             ],
@@ -48,7 +48,7 @@ class FlyRegisterStreamWrappers implements CompilerPassInterface {
         ],
       );
       $service_definition->setPublic(TRUE);
-      $container->setDefinition('stream_wrapper.' . $key['id'], $service_definition);
+      $container->setDefinition('flysystem_adapter.' . $key['id'], $service_definition);
 
     }
   }

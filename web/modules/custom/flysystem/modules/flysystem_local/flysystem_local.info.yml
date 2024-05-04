@@ -1,0 +1,7 @@
+name: Flysystem Local Adapter
+description: 'Provides a Local Filesystem Adapter for Flysystem'
+package: Flysystem
+type: module
+core_version_requirement: ^10.3
+dependencies:
+  - flysystem:flysystem

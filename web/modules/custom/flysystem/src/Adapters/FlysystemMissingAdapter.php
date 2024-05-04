@@ -12,6 +12,17 @@ use League\Flysystem\FilesystemAdapter;
 class FlysystemMissingAdapter implements FilesystemAdapter {
 
   /**
+   * Adapter Id.
+   *
+   * @var string
+   */
+  protected $adapterId;
+
+  /**
+   *
+   */
+
+  /**
    * {@inheritdoc}
    */
   public function fileExists($path): bool {

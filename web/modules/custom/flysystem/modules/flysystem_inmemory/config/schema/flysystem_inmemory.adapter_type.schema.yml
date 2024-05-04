@@ -1,0 +1,7 @@
+plugin.plugin_configuration.adapter_type.in_memory:*:
+  label: 'Flysystem InMemory Adapter settings'
+  type: mapping
+  mapping:
+    schema:
+      type: string
+      label: 'Schema to identify file designations using this adapter instance (public, private, tmp, etc.)'

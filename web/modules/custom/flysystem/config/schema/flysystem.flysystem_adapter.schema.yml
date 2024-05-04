@@ -1,0 +1,23 @@
+flysytem.flysystem_adapter.*:
+  type: config_entity
+  label: 'Flysystem Adapter config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    uuid:
+      type: string
+    description:
+      type: text
+      label: 'Description'
+    adapter_type:
+      type: text
+      label: 'Flysystem Adapter Plugin'
+    adapter_config:
+      type: plugin.plugin_configuration.adapter_type.[%parent.adapter_type]
+
+plugin.plugin_configuration.adapter_type.*:
+  type: mapping

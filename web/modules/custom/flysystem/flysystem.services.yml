@@ -8,6 +8,6 @@ services:
     decoration_priority: 1
     arguments: ['@flysystem.filesystem.inner', '@stream_wrapper_manager', '@settings']
 
-  plugin.manager.flysystem:
-    class: Drupal\flysystem\Plugin\FlysystemPluginManager
+  plugin.manager.flysystem_adapter:
+    class: Drupal\flysystem\Plugin\FlysystemAdapterPluginManager
     arguments: ['@container.namespaces', '@cache.discovery', '@module_handler']

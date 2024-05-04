@@ -1,0 +1,8 @@
+name: Flysystem In Memory Adapter
+description: 'Provides an In Memory Filesystem Adapter for Flysystem (used for testing)'
+package: Flysystem
+type: module
+core_version_requirement: ^10.3
+dependencies:
+  - flysystem:flysystem
+hidden: true

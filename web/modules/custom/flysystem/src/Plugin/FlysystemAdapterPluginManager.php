@@ -10,7 +10,7 @@ use Drupal\Core\Plugin\DefaultPluginManager;
 /**
  * Manages Flysystem plugins.
  */
-class FlysystemPluginManager extends DefaultPluginManager implements FallbackPluginManagerInterface {
+class FlysystemAdapterPluginManager extends DefaultPluginManager implements FallbackPluginManagerInterface {
 
   /**
    * Constructs a Flysystem object.

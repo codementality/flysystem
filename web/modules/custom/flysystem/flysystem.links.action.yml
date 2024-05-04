@@ -1,0 +1,5 @@
+entity.flysystem_adapter.add_form:
+  route_name: 'entity.flysystem_adapter.add_form'
+  title: 'Add Flysystem Adapter'
+  appears_on:
+    - entity.flysystem_adapter.collection

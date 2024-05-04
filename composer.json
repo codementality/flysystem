@@ -24,6 +24,7 @@
         "drupal/redirect": "^1.9",
         "drupal/s3fs": "^4.0@dev",
         "drupal/search_api": "^1.34",
+        "drupal/search_api_solr": "^4.3",
         "drupal/tour_ui": "^2.0",
         "drush/drush": "^12",
         "elazar/flystream": "^1.0",

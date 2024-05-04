@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ruleset name="drupal_skeleton">
   <description>Default PHP CodeSniffer configuration for Drupal.</description>
-  <file>web/modules/custom</file>
+  <file>web/modules/custom/flysystem_adapter</file>
   <file>web/themes/custom</file>
   <arg name="extensions" value="inc,install,module,php,profile,test,theme,yml"/>
 

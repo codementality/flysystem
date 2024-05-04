@@ -27,7 +27,7 @@ class FlysystemServiceProvider extends ServiceProviderBase {
         continue;
       }
       else {
-        
+
       }
       // Registers the FlyStreamWrapper.
       // @todo Revisit if this is needed,

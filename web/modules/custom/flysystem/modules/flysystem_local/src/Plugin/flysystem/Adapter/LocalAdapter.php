@@ -1,14 +1,16 @@
 <?php
 
-namespace Drupal\flysystem\Plugin\Adapter;
+namespace Drupal\flysystem_local\Plugin\flysystem\Adapter;
 
-use Drupal\Component\FileSecurity\FileSecurity;
 use Drupal\Component\Utility\UrlHelper;
+// This is included for some constants in this service related to file and
+// directory permissions.
 use Drupal\Core\File\FileSystem;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Logger\RfcLogLevel;
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Plugin\PluginFormInterface;
 use Drupal\flysystem\Adapters\FlysystemMissingAdapter;
-use Drupal\flysystem\Plugin\FlysystemPluginInterface;
+use Drupal\flysystem\Plugin\Adapter\AdapterPluginBase;
 use Drupal\flysystem\Plugin\Trait\FlysystemUrlTrait;
 use League\Flysystem\Local\LocalFilesystemAdapter;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -16,9 +18,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Drupal plugin for the "Local" Flysystem adapter.
  *
- * @FlysystemAdapter(id = "local")
+ * @FlysystemAdapter(
+ *   id = "local",
+ *   label = "Local Adapter",
+ *   description = "Flysystem Local Adapter"
+ * )
  */
-class LocalAdapter implements FlysystemPluginInterface, ContainerFactoryPluginInterface {
+class LocalAdapter extends AdapterPluginBase implements PluginFormInterface {
 
   use FlysystemUrlTrait {
     getExternalUrl as getDownloadlUrl;
@@ -90,7 +96,7 @@ class LocalAdapter implements FlysystemPluginInterface, ContainerFactoryPluginIn
   /**
    * {@inheritdoc}
    */
-  public function getExternalUrl($uri) {
+  public function getExternalUrl($uri, $isSecureRequest = FALSE) {
     if ($this->isPublic === FALSE) {
       return $this->getDownloadlUrl($uri);
     }
@@ -164,27 +170,57 @@ class LocalAdapter implements FlysystemPluginInterface, ContainerFactoryPluginIn
   }
 
   /**
-   * Writes an .htaccess file.
+   * {@inheritdoc}
    *
-   * @param bool $force
-   *   Whether to overwrite an existing file.
-   *
-   * @return bool
-   *   True on success, false on failure.
+   * @todo Complete this method.
    */
-  protected function writeHtaccess($force) {
-    $htaccess_path = $this->root . '/.htaccess';
+  public function getConfiguration() {
+    return [];
+  }
 
-    if (file_exists($htaccess_path) && !$force) {
-      // Short circuit if the .htaccess file already exists.
-      return TRUE;
-    }
+  /**
+   * {@inheritdoc}
+   *
+   * @todo Complete this method.
+   */
+  public function setConfiguration($adapterConfig) {
+  }
 
-    // Make file writable so that we can overwrite it.
-    if (file_exists($htaccess_path)) {
-      chmod($htaccess_path, 0666);
-    }
-    return @file_put_contents($htaccess_path, FileSecurity::htaccessLines(!$this->isPublic)) && chmod($htaccess_path, 0444);
+  /**
+   * {@inheritdoc}
+   *
+   * @todo Complete method.
+   */
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+    return [];
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * @todo Complete method.
+   */
+  public function validateConfigurationForm(array &$form, FormStateInterface $form_state) {
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * @todo Complete method.
+   */
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * @todo Complete method
+   * @todo determine if this needs to be defined on the interface, or
+   *   declared as protected or private.
+   */
+  public function writeHtaccess($force = FALSE) {
+
   }
 
 }

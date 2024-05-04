@@ -5,12 +5,11 @@ namespace Drupal\flysystem\Annotation;
 use Drupal\Component\Annotation\Plugin;
 
 /**
- * Defines a Flysystem adapter plguin.
+ * Defines a Flysystem adapter plugin.
  *
- * Plugin Namespace: Flysystem.
+ * For a working example:
  *
- * For a working example, see \Drupal\flysystem\Flysystem\Local.
- *
+ * @see \Drupal\flysystem_local\Plugin\flysystem\Adapter\LocalAdapter
  * @see plugin_api
  *
  * @Annotation
@@ -25,10 +24,21 @@ class FlysystemAdapter extends Plugin {
   public $id;
 
   /**
-   * A list of extension dependencies.
+   * Human readable name of Adapter plugin.
    *
-   * @var string[]
+   * @var \Drupal\Core\Annotation\Translation
+   *
+   * @ingroup plugin_translatable
    */
-  public $extensions = [];
+  public $label;
+
+  /**
+   * The Adapter description.
+   *
+   * @var \Drupal\Core\Annotation\Translation
+   *
+   * @ingroup plugin_translatable
+   */
+  public $description;
 
 }
