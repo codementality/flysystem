@@ -16,10 +16,10 @@
     "require": {
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.6",
-        "drupal-libraries/flysystem-stream-wrapper": "^2.0",
         "drupal/admin_toolbar": "^3.4",
         "drupal/core-composer-scaffold": "10.3.x-dev",
         "drupal/core-recommended": "10.3.x-dev",
+        "drupal/flysystem": "^3.0",
         "drupal/pathauto": "^1.12",
         "drupal/redirect": "^1.9",
         "drupal/s3fs": "^4.0@dev",
