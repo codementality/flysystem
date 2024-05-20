@@ -1,5 +1,0 @@
-name: 'Flysystem adapter'
-type: module
-description: 'Flysystem Adapter Plugin system'
-package: 'Flysystem'
-core_version_requirement: ^10

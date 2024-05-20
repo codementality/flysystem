@@ -1,4 +1,0 @@
-services:
-  plugin.manager.flysystem_adapter_config:
-    class: Drupal\flysystem_adapter\Plugin\FlysystemAdapterConfigPluginManager
-    parent: default_plugin_manager
